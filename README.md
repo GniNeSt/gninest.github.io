@@ -1,1 +1,0 @@
-# gninest.github.io
