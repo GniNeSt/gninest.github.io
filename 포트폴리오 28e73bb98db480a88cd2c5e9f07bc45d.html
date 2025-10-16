@@ -1,0 +1,726 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>포트폴리오</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(134, 131, 126, 1);
+	fill: rgba(134, 131, 126, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(134, 131, 126, 1);
+	fill: rgba(134, 131, 126, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="28e73bb9-8db4-80a8-8cd2-c5e9f07bc45d" class="page sans"><header><img class="page-cover-image" src="%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon notion-static-icon" src="https://www.notion.so/icons/user_lightgray.svg"/></div><h1 class="page-title">포트폴리오</h1><p class="page-description"></p></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="28e73bb9-8db4-81ee-91cc-f83e36da27cc"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/light-bulb_lightgray.svg"/></div><div style="width:100%"><ul id="28e73bb9-8db4-8194-9bb8-db3ce17bb3f6" class="block-color-gray bulleted-list"><li style="list-style-type:disc">적힌 내용들을 지우고 입력해주세요.</li></ul><ul id="28e73bb9-8db4-8102-a3d4-de354cd21aeb" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-gray">완성한 다음에 우측 상단 (공유 - 게시 - 게시버튼)을 누르면 링크로 공유할 수 있습니다. </mark></li></ul><ul id="28e73bb9-8db4-8132-9c14-c514e099762b" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-gray">확인 후 지워주세요.</mark></li></ul></div></figure><div id="28e73bb9-8db4-81c1-94ce-fd4aed32a80d" class="column-list"><div id="28e73bb9-8db4-8190-bb60-d22170bef0ea" style="width:25%" class="column"><figure id="28e73bb9-8db4-818d-a6e5-f11b3546413d" class="image" style="text-align:left"><a href="%E1%84%82%E1%85%A9%E1%84%89%E1%85%B5%E1%84%8B%E1%85%A5%E1%86%AB_%E1%84%8B%E1%85%A5%E1%86%AF%E1%84%80%E1%85%AE%E1%86%AF_%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC5.png"><img style="width:144px" src="%E1%84%82%E1%85%A9%E1%84%89%E1%85%B5%E1%84%8B%E1%85%A5%E1%86%AB_%E1%84%8B%E1%85%A5%E1%86%AF%E1%84%80%E1%85%AE%E1%86%AF_%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC5.png"/></a></figure><p id="28e73bb9-8db4-8153-9c67-fb32863312c6" class="">
+</p></div><div id="28e73bb9-8db4-8170-8d57-efa715205807" style="width:75%" class="column"><h1 id="28e73bb9-8db4-8109-a5c4-db346fcd5e70" class="block-color-gray">노시언</h1><p id="28e73bb9-8db4-815a-9a0c-d491b02e760d" class="">안녕하세요. <br/>5년간 노션을 사용한 18만 노션 인플루언서 노시언입니다. <br/>노션만 실 사용하며 노션의 모든것을 공부하고 사랑합니다. <br/>감사합니다. </p><p id="28e73bb9-8db4-81da-9453-cfb899e8553f" class="">
+</p></div></div><hr id="28e73bb9-8db4-8150-b723-f2b3e886b65b"/><div id="28e73bb9-8db4-81e8-a632-ed0685f9c079" class="column-list"><div id="28e73bb9-8db4-8188-a2fb-d0e630ac21da" style="width:37.5%" class="column"><h1 id="28e73bb9-8db4-8125-b19b-c9d358bbe315" class="block-color-gray">연락처</h1><p id="28e73bb9-8db4-81fb-979f-cfb20b9a8ebf" class="">T : 010-0000-0000</p><p id="28e73bb9-8db4-81d0-92c0-f232a0b7250f" class="">A : 서울특별시 노션구</p><p id="28e73bb9-8db4-81c3-9d80-e2a6d075fe58" class="">E : nosion.0000@gmail.com</p><p id="28e73bb9-8db4-81e7-8651-f44597a0c546" class="">
+</p><h1 id="28e73bb9-8db4-81c9-bf32-e529041de1a5" class="block-color-gray">교육</h1><p id="28e73bb9-8db4-81a2-9e6b-e85734a127e9" class="">2020.02 - 2024.02</p><p id="28e73bb9-8db4-81d5-8c57-df9763749800" class="">노션대학교 ⎜ 페이지학과</p><p id="28e73bb9-8db4-8139-8763-cf2255071e05" class="">학점 : 4.3</p><p id="28e73bb9-8db4-8126-a11c-ffd2a2437f67" class="">
+</p><p id="28e73bb9-8db4-818f-8a1b-fe13801e68ef" class="">2017.02 - 2020.02</p><p id="28e73bb9-8db4-81b9-b79e-dfdfdb8dfdea" class="">노션고등학교</p><h1 id="28e73bb9-8db4-8127-a8e3-d788bb7c0163" class="block-color-gray">언어</h1><p id="28e73bb9-8db4-819e-8354-e7cef57b1c4c" class="">영어       - ★★★★☆</p><p id="28e73bb9-8db4-8153-a3ee-de54aeaa6feb" class="">중국어    - ★★★☆☆</p><p id="28e73bb9-8db4-81f2-975a-fa9a2e7b5dd6" class="">스페인어 - ★★☆☆☆</p><p id="28e73bb9-8db4-81dd-b94c-f4134de4f34b" class="">
+</p></div><div id="28e73bb9-8db4-81d7-a8ab-e6aee49771b5" style="width:62.5%" class="column"><h1 id="28e73bb9-8db4-81dd-bd86-d4e71fd4a7be" class="block-color-gray">경력</h1><p id="28e73bb9-8db4-81dc-a18f-c08661e86e65" class="">2024.04 - 현재</p><p id="28e73bb9-8db4-817f-a063-ecb8afbed2e2" class="">주식회사 노시언⎜ 노션 크리에이터</p><ul id="28e73bb9-8db4-8110-94c2-fe0b9608dcf8" class="bulleted-list"><li style="list-style-type:disc">개인의 생산성 향상을 위한 노션 템플릿 개발</li></ul><ul id="28e73bb9-8db4-8104-b515-fe8e62f59984" class="bulleted-list"><li style="list-style-type:disc">월간 노션 사용법 세미나 진행 (참석자 0명)</li></ul><p id="28e73bb9-8db4-81cb-a3ec-ed7999f52d9d" class="">
+</p><p id="28e73bb9-8db4-8150-813f-f9fe5dbb8bd7" class="">2022.06 - 2024.03</p><p id="28e73bb9-8db4-81d4-bd17-d3f28558902b" class="">디지털노마드 ⎜ 콘텐츠 크리에이터</p><ul id="28e73bb9-8db4-8166-bb70-e5b279d5ba7e" class="bulleted-list"><li style="list-style-type:disc">노션 관련 인스타그램 운영 (구독자 17만명)</li></ul><ul id="28e73bb9-8db4-8183-86f7-d2c90dff2877" class="bulleted-list"><li style="list-style-type:disc">노션 템플릿 마켓 운영 (월 판매 0건)</li></ul><ul id="28e73bb9-8db4-81e6-9ecb-e7b0667ffb55" class="bulleted-list"><li style="list-style-type:disc">노션 초보자를 위한 온라인 강의 제작</li></ul><p id="28e73bb9-8db4-811e-9f95-d9174879cc47" class="">
+</p><p id="28e73bb9-8db4-81b2-b3f3-c0d75ddb9312" class="">
+</p><p id="28e73bb9-8db4-81ae-babe-dcd68752824d" class="">
+</p><h1 id="28e73bb9-8db4-812c-8eda-cc41529a6709" class="block-color-gray">자격증</h1><ul id="28e73bb9-8db4-81c1-bbb7-c54d3cfeb906" class="toggle"><li><details open=""><summary>2024.05 <strong>노션 전문가</strong> (Notion Expert)</summary><p id="28e73bb9-8db4-8199-851a-c58506fc0924" class="">(자격증 이미지를 넣으세요)</p></details></li></ul><ul id="28e73bb9-8db4-81ec-b1a5-c0e9d2fb7043" class="toggle"><li><details open=""><summary>2023.11 <strong>구글 워크스페이스</strong> (Google Workspace Expert)</summary><p id="28e73bb9-8db4-81a8-9a1a-c593eefec791" class="">(자격증 이미지를 넣으세요)</p></details></li></ul><ul id="28e73bb9-8db4-8123-9b7c-c00d2d312d67" class="toggle"><li><details open=""><summary>2021.06 <strong>디지털 마케팅 전문가</strong> (Google)</summary><p id="28e73bb9-8db4-8189-866b-d6cc9cb77cf3" class="">(자격증 이미지를 넣으세요)</p></details></li></ul><p id="28e73bb9-8db4-81a2-9dcf-fb95bfdb20ba" class="">
+</p></div></div><hr id="28e73bb9-8db4-8125-9979-feeb5ee97989"/><h1 id="28e73bb9-8db4-81af-a604-f3493d0040c4" class="block-color-gray">스킬</h1><ul id="28e73bb9-8db4-810b-b440-f1bdd3c63a04" class="block-color-gray bulleted-list"><li style="list-style-type:disc">본인의 스킬을 입력해주세요. 아이콘은 인터넷에서 다운로드 받고 이모지 맨 아래에서 추가하시면 됩니다.   (확인 후 지워주세요)</li></ul><div id="28e73bb9-8db4-81be-99f7-d67c35277b40" class="collection-content"><h4 class="collection-title">스킬</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><img src="https://www.notion.so/icons/font_gray.svg" style="width:14px;height:14px;display:block"/></span>이름</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>선택</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/checklist_gray.svg" style="width:14px;height:14px;display:block"/></span>역량</th></tr></thead><tbody><tr id="28e73bb9-8db4-81b3-b4c4-e09f259bbf2e"><td class="cell-title"><a href="https://www.notion.so/Notion-28e73bb98db481b3b4c4e09f259bbf2e?pvs=21"><img class="icon" src="Notion.png"/>Notion</a></td><td class="cell-L@Oh"><span class="selected-value select-value-color-default">★★★★★</span></td><td class="cell-Mann">템플릿 제작, 데이터 베이스 활용, 프로젝트 운용</td></tr><tr id="28e73bb9-8db4-8158-bc47-f6fa0c5912b1"><td class="cell-title"><a href="https://www.notion.so/Chat-GPT-28e73bb98db48158bc47f6fa0c5912b1?pvs=21">Chat GPT</a></td><td class="cell-L@Oh"><span class="selected-value select-value-color-default">★★★★★</span></td><td class="cell-Mann">AI활용, 가설검증</td></tr><tr id="28e73bb9-8db4-81e7-951a-e4d9434c42c7"><td class="cell-title"><a href="https://www.notion.so/Photoshop-28e73bb98db481e7951ae4d9434c42c7?pvs=21"><img class="icon" src="Ps.png"/>Photoshop</a></td><td class="cell-L@Oh"><span class="selected-value select-value-color-default">★★★★★</span></td><td class="cell-Mann">이미지 편집, 누끼, 이미지 벨런싱, AI활용</td></tr><tr id="28e73bb9-8db4-8170-baac-e151929becb6"><td class="cell-title"><a href="https://www.notion.so/Figma-28e73bb98db48170baace151929becb6?pvs=21"><img class="icon" src="Figma.png"/>Figma</a></td><td class="cell-L@Oh"><span class="selected-value select-value-color-default">★★★★☆</span></td><td class="cell-Mann">디자인 협업, 웹페이지 디자인</td></tr><tr id="28e73bb9-8db4-81c5-bb4b-ca5e24a238a9"><td class="cell-title"><a href="https://www.notion.so/Canva-28e73bb98db481c5bb4bca5e24a238a9?pvs=21"><img class="icon" src="Canva.png"/>Canva</a></td><td class="cell-L@Oh"><span class="selected-value select-value-color-default">★★★★★</span></td><td class="cell-Mann">발표자료 디자인, 브랜드 디자인</td></tr><tr id="28e73bb9-8db4-81c8-ad42-ea4e3bf79744"><td class="cell-title"><a href="https://www.notion.so/Midjourney-28e73bb98db481c8ad42ea4e3bf79744?pvs=21"><img class="icon" src="Midjourney.png"/>Midjourney</a></td><td class="cell-L@Oh"><span class="selected-value select-value-color-default">★★★★☆</span></td><td class="cell-Mann">AI 이미지 영상 생성, 디자인 레퍼런스 제작</td></tr><tr id="28e73bb9-8db4-8120-9679-daad3d306bce"><td class="cell-title"><a href="https://www.notion.so/Illustrator-28e73bb98db481209679daad3d306bce?pvs=21"><img class="icon" src="Ai.png"/>Illustrator</a></td><td class="cell-L@Oh"><span class="selected-value select-value-color-default">★★★★☆</span></td><td class="cell-Mann">백터 디자인, 아이콘 제작</td></tr><tr id="28e73bb9-8db4-81b0-a51c-c6e8a6a9b1fa"><td class="cell-title"><a href="https://www.notion.so/Grok-28e73bb98db481b0a51cc6e8a6a9b1fa?pvs=21">Grok</a></td><td class="cell-L@Oh"><span class="selected-value select-value-color-default">★★★★☆</span></td><td class="cell-Mann">펙트체크, 이미지 레퍼런스 확인</td></tr><tr id="28e73bb9-8db4-81c3-928d-d2cddaf4c965"><td class="cell-title"><a href="https://www.notion.so/Powerpoint-28e73bb98db481c3928dd2cddaf4c965?pvs=21"><img class="icon" src="Powerpoint.png"/>Powerpoint</a></td><td class="cell-L@Oh"><span class="selected-value select-value-color-default">★★★★☆</span></td><td class="cell-Mann">프레젠테이션 제작</td></tr><tr id="28e73bb9-8db4-8158-b982-cbcb87be3f13"><td class="cell-title"><a href="https://www.notion.so/Excel-28e73bb98db48158b982cbcb87be3f13?pvs=21"><img class="icon" src="Excel.png"/>Excel</a></td><td class="cell-L@Oh"><span class="selected-value select-value-color-default">★★★★★</span></td><td class="cell-Mann">데이터 관리, 차트 제작</td></tr></tbody></table><br/><br/></div><hr id="28e73bb9-8db4-8123-a634-d861ee633684"/><h1 id="28e73bb9-8db4-81b2-bf30-eb6f5468cc2e" class="block-color-gray">프로젝트</h1><ul id="28e73bb9-8db4-815a-a991-fc45c01576dc" class="block-color-gray bulleted-list"><li style="list-style-type:disc">직접 참여했던 프로젝트들을 기록해보세요. (확인 후 지워주세요)</li></ul><div id="28e73bb9-8db4-8109-9fea-d65707ec346e" class="collection-content"><h4 class="collection-title">프로젝트들</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><img src="https://www.notion.so/icons/font_gray.svg" style="width:14px;height:14px;display:block"/></span>이름</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/link_gray.svg" style="width:14px;height:14px;display:block"/></span>URL</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/checkmark_gray.svg" style="width:14px;height:14px;display:block"/></span>결과</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/calendar_gray.svg" style="width:14px;height:14px;display:block"/></span>기간</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/hand_gray.svg" style="width:14px;height:14px;display:block"/></span>기여도</th></tr></thead><tbody><tr id="28e73bb9-8db4-8182-9f37-f5e6f863b498"><td class="cell-title"><a href="https://www.notion.so/ROAS-300-28e73bb98db481829f37f5e6f863b498?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/checkmark-line_lightgray.svg"/>ROAS 300% 달성하기</a></td><td class="cell-\_&lt;O"><a href="nosion.io" class="url-value">nosion.io</a></td><td class="cell-FHtS">✔달성완료</td><td class="cell-NK_n"><time>@2025년 8월 5일 → 2025년 8월 14일</time></td><td class="cell-e{Zb">기여도 -  100%</td></tr><tr id="28e73bb9-8db4-8129-b474-dc31e4df34ad"><td class="cell-title"><a href="https://www.notion.so/28e73bb98db48129b474dc31e4df34ad?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/checkmark-line_lightgray.svg"/>예산 줄이기</a></td><td class="cell-\_&lt;O"><a href="nosion.io" class="url-value">nosion.io</a></td><td class="cell-FHtS">✔예산 30% 줄임</td><td class="cell-NK_n"><time>@2025년 6월 4일 → 2025년 6월 21일</time></td><td class="cell-e{Zb">기여도 - 80%</td></tr><tr id="28e73bb9-8db4-81e8-bb56-e00dc8fda17c"><td class="cell-title"><a href="https://www.notion.so/28e73bb98db481e8bb56e00dc8fda17c?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/checkmark-line_lightgray.svg"/>브랜드 디자인 개편</a></td><td class="cell-\_&lt;O"><a href="nosion.io" class="url-value">nosion.io</a></td><td class="cell-FHtS">✔개편 완료</td><td class="cell-NK_n"><time>@2025년 8월 7일 → 2025년 8월 15일</time></td><td class="cell-e{Zb">기여도 - 50%</td></tr></tbody></table><br/><br/></div><p id="28e73bb9-8db4-814a-85ce-d1712e7eeab9" class="">
+</p><hr id="28e73bb9-8db4-8191-86a5-fb48ec790391"/><h1 id="28e73bb9-8db4-8141-834f-f435ac3f7326" class="block-color-gray">여러가지 경험</h1><ul id="28e73bb9-8db4-8133-8aa1-d8b2a1b1571c" class="block-color-gray bulleted-list"><li style="list-style-type:disc">경험이나 가치관을 나타낼 수 있는 것들을 기록해보세요. (확인 후 지워주세요)</li></ul><div id="28e73bb9-8db4-81b1-97f1-e8fa111f8d7d" class="collection-content"><h4 class="collection-title">경험들</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><img src="https://www.notion.so/icons/font_gray.svg" style="width:14px;height:14px;display:block"/></span>이름</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/link_gray.svg" style="width:14px;height:14px;display:block"/></span>URL</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/calendar_gray.svg" style="width:14px;height:14px;display:block"/></span>기간</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/map_gray.svg" style="width:14px;height:14px;display:block"/></span>위치</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/groups_gray.svg" style="width:14px;height:14px;display:block"/></span>주최</th></tr></thead><tbody><tr id="28e73bb9-8db4-816c-9bdf-e524b3e1a435"><td class="cell-title"><a href="https://www.notion.so/28e73bb98db4816c9bdfe524b3e1a435?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/checkmark-line_lightgray.svg"/>노션템플릿 제작 판매</a></td><td class="cell-\_&lt;O"><a href="nosion.io" class="url-value">nosion.io</a></td><td class="cell-NK_n"><time>@2025년 8월 22일</time></td><td class="cell-Gk^d"></td><td class="cell-co]&lt;"></td></tr><tr id="28e73bb9-8db4-81af-863c-cd2709cf3dab"><td class="cell-title"><a href="https://www.notion.so/17-28e73bb98db481af863ccd2709cf3dab?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/checkmark-line_lightgray.svg"/>인스타그램 17만</a></td><td class="cell-\_&lt;O"><a href="https://www.instagram.com/nosion.notion/" class="url-value">https://www.instagram.com/nosion.notion/</a></td><td class="cell-NK_n"><time>@2025년 8월 23일</time></td><td class="cell-Gk^d"></td><td class="cell-co]&lt;"></td></tr><tr id="28e73bb9-8db4-817a-9597-c93298ccacf7"><td class="cell-title"><a href="https://www.notion.so/28e73bb98db4817a9597c93298ccacf7?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/checkmark-line_lightgray.svg"/>필리핀 봉사활동</a></td><td class="cell-\_&lt;O"><a href="nosion.io" class="url-value">nosion.io</a></td><td class="cell-NK_n"><time>@2025년 6월 5일 → 2025년 6월 20일</time></td><td class="cell-Gk^d">필리핀</td><td class="cell-co]&lt;">봉사활동단체</td></tr></tbody></table><br/><br/></div><p id="28e73bb9-8db4-81cb-b1b1-e74444041fe7" class="">
+</p><hr id="28e73bb9-8db4-815c-96e8-c50e46d8acbc"/><h1 id="28e73bb9-8db4-8105-a2ed-ea795ec76508" class="block-color-gray">SNS</h1><ul id="28e73bb9-8db4-814f-b09a-fea1a2e60bd7" class="block-color-gray bulleted-list"><li style="list-style-type:disc">본인의 SNS를 북마크 기능을 이용하여 입력해주세요. (확인 후 지워주세요)</li></ul><div id="28e73bb9-8db4-812d-8792-da176b9d283f" class="column-list"><div id="28e73bb9-8db4-81d6-9374-dce2710de9c1" style="width:50%" class="column"><figure id="28e73bb9-8db4-81ea-b469-e35e24d0d19c"><a href="http://nosion.io/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">노시언</div><div class="bookmark-description">노션 크리에이터 노시언의 템플릿</div></div><div class="bookmark-href"><img src="https://cdn.imweb.me/thumbnail/20250807/5a25f9cf19624.png" class="icon bookmark-icon"/>http://nosion.io/</div></div><img src="https://cdn.imweb.me/upload/S20250805ee639c2cd3609/600ab1ededd95.png" class="bookmark-image"/></a></figure></div><div id="28e73bb9-8db4-813d-9e55-e39ea01c2238" style="width:49.99999999999999%" class="column"><figure id="28e73bb9-8db4-8150-969d-f4be257f6547"><a href="https://www.instagram.com/nosion.notion/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">노시언 (@nosion.notion)</div><div class="bookmark-description">Instagram photos and videos</div></div><div class="bookmark-href"><img src="https://static.cdninstagram.com/rsrc.php/v4/yI/r/VsNE-OHk_8a.png" class="icon bookmark-icon"/>https://www.instagram.com/nosion.notion/</div></div><img src="https://scontent-iad3-2.cdninstagram.com/v/t51.2885-19/476071843_532877009802150_914145868720799124_n.jpg?stp=dst-jpg_s240x240_tt6&amp;efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDI0LmMyIn0&amp;_nc_ht=scontent-iad3-2.cdninstagram.com&amp;_nc_cat=106&amp;_nc_oc=Q6cZ2QETQ5RaKFu0jdpN0rVKWilz3MpiX3vm13LZqBHcEPV935gyN-PRdmoQJTzt2F3wxCE&amp;_nc_ohc=ZVdHOoOLZokQ7kNvwEqMT3_&amp;_nc_gid=yktqXwqWxDT-l5tLpMk1dA&amp;edm=AMO9-JQAAAAA&amp;ccb=7-5&amp;oh=00_AfUirTPjkWePPaAiFXwc6ylH_Pm6m4V8gRaQnhtqSElhTw&amp;oe=68AF73F0&amp;_nc_sid=cc8940" class="bookmark-image"/></a></figure></div></div><p id="28e73bb9-8db4-8163-a2d6-efeea38cb350" class="">
+</p><p id="28e73bb9-8db4-81ea-b173-ead054aefb56" class="">
+</p><p id="28e73bb9-8db4-813d-b0c7-de5c46d9c6cb" class="">
+</p><p id="28e73bb9-8db4-81de-b265-e2a2d877f04e" class="">
+</p><hr id="28e73bb9-8db4-814b-a22e-f3a7ad996f93"/><p id="28e73bb9-8db4-81a2-a5b9-ca723e5e9a41" class="">
+</p><div id="28e73bb9-8db4-8181-b490-ee5ce6f84807" class="column-list"><div id="28e73bb9-8db4-81b7-91f3-c57edadf9039" style="width:37.5%" class="column"><figure id="28e73bb9-8db4-81c8-b68b-c5649ddf2af2" class="image"><a href="f67c0331-c18d-43b5-893b-cd5cf4c1aee4.png"><img style="width:120px" src="f67c0331-c18d-43b5-893b-cd5cf4c1aee4.png"/></a></figure><h2 id="28e73bb9-8db4-81e0-8349-d03d11dcda3c" class="">노시언</h2><p id="28e73bb9-8db4-8147-89b9-db31490ae66e" class="">✏️노션템플릿 제작, 제공</p><p id="28e73bb9-8db4-815a-8f9b-fa2cdf173aff" class="">✏️책 A4 1장 핵심요약 제공</p><p id="28e73bb9-8db4-8122-97af-ee49a04633db" class="">🌈노션으로 인생을 더 행복하게 :)</p><p id="28e73bb9-8db4-8161-8198-ee74117d64fd" class="">
+</p></div><div id="28e73bb9-8db4-81af-aa1a-c79ff7936797" style="width:62.5%" class="column"><p id="28e73bb9-8db4-81c9-95c3-faeefdec5818" class="">
+</p><p id="28e73bb9-8db4-817c-8dfd-cdc533c5ecdd" class="">구름, 고양이, 책, 노션 좋아합니다.🥰</p></div></div><hr id="28e73bb9-8db4-8113-a38c-e29b5e3d3a06"/><p id="28e73bb9-8db4-8148-9dcc-f899a514fe26" class="">ⓒ 2024 노시언 All rights reserved.</p><p id="28e73bb9-8db4-81a8-8d16-c61372dac5bf" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
