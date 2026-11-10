@@ -223,6 +223,12 @@ function videoEmbed(ids, start) {
   const multi = ids.length > 1;
   const params = multi ? '?playlist=' + ids.join(',') + '&loop=1&rel=0&playsinline=1' : '?rel=0&playsinline=1' + (start ? '&start=' + start : '');
   const src = 'https://www.youtube-nocookie.com/embed/' + ids[0] + params;
+  // 파일을 더블클릭해 연(file://) 경우 YouTube가 재생을 막으므로(오류 153), 썸네일 + YouTube 링크로 대신 보여 줍니다.
+  if (location.protocol === 'file:') {
+    return ids.map(id => '<a class="video-frame video-fallback" href="https://youtu.be/' + id + (start && ids.length === 1 ? '?t=' + start : '') + '" target="_blank" rel="noopener noreferrer">' +
+      '<img src="https://img.youtube.com/vi/' + id + '/hqdefault.jpg" alt="플레이 영상 썸네일"><span>▶ YouTube에서 재생</span></a>').join('') +
+      '<p class="detail-note">로컬 파일로 열어서 영상을 바로 재생할 수 없습니다. 웹에 올린 사이트에서는 이 자리에서 재생됩니다.</p>';
+  }
   return '<div class="video-frame"><iframe src="' + src + '" title="' + (multi ? '플레이 영상 (연속 반복 재생)' : '플레이 영상') + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>' +
     (multi ? '<p class="detail-note">영상 ' + ids.length + '개가 이어서 재생되고 끝나면 처음부터 반복됩니다.</p>' : '');
 }
