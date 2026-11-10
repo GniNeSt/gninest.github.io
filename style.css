@@ -170,3 +170,14 @@ h1{margin:16px 0 22px}
   .featured{grid-template-columns:1fr}
   .feature-visual{aspect-ratio:16/9}
 }
+
+/* ---------- 코드 발췌 블록 ---------- */
+.excerpt-note{font-size:15px}
+.code-block{margin-top:12px;border:1px solid var(--line);background:#1d1f19;color:#e8e6dc}
+.code-block summary{cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:10px 14px;background:#2b2f26;color:var(--paper);font-size:14px;font-weight:600;list-style:none}
+.code-block summary::-webkit-details-marker{display:none}
+.code-block summary span::before{content:"▸ ";color:var(--yellow)}
+.code-block[open] summary span::before{content:"▾ "}
+.code-block summary small{font-weight:400;color:#b7bbab;font-size:12.5px;font-family:Consolas,"D2Coding",monospace}
+.code-block pre{margin:0;padding:14px 16px;overflow:auto;max-height:520px}
+.code-block code{font:13px/1.55 Consolas,"D2Coding","Malgun Gothic",monospace;white-space:pre;tab-size:4}

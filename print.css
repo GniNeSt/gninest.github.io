@@ -1,0 +1,107 @@
+/* 기술 포트폴리오 인쇄용 스타일 — A4 가로(297×210mm) */
+@page { size: A4 landscape; margin: 0; }
+:root { --paper:#f3f1e9; --ink:#242820; --muted:#5d6155; --line:#d3d4c8; --accent:#a53e25; --card:#ebe8dd; }
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html, body { margin: 0; background: #8a8c84; }
+body { font-family: "Pretendard Variable", Pretendard, "Malgun Gothic", sans-serif; color: var(--ink); font-size: 10pt; line-height: 1.55; word-break: keep-all; }
+a { color: inherit; text-decoration: underline; text-decoration-color: #b9b9ad; text-underline-offset: 2px; }
+h1, h2, h3, p { margin: 0; }
+
+.page { width: 297mm; height: 210mm; padding: 13mm 15mm 16mm; position: relative; overflow: hidden; background: var(--paper); margin: 0 auto 8mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+.pfoot { position: absolute; left: 15mm; right: 15mm; bottom: 7mm; display: flex; justify-content: space-between; font-size: 8pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 2.5mm; }
+.pfoot a { text-decoration: none; }
+
+.eyebrow { font-size: 8.5pt; font-weight: 700; letter-spacing: .08em; color: var(--accent); text-transform: uppercase; }
+.ph { margin-bottom: 6mm; }
+.ph h2 { font-size: 22pt; letter-spacing: -.02em; line-height: 1.25; margin-top: 1mm; }
+.ph.slim { margin-bottom: 5mm; }
+.ph.slim h2 { font-size: 17pt; }
+h3 { font-size: 11pt; margin: 4.5mm 0 2mm; }
+.tags { display: flex; flex-wrap: wrap; gap: 1.5mm; margin-top: 2mm; }
+.tags span { font-size: 8.5pt; border: 1px solid #c9c8bb; background: #fff8; padding: .4mm 2.2mm; }
+.award { display: inline-block; margin-top: 2.5mm; font-size: 9pt; font-weight: 600; color: #673b12; border-bottom: 1.5px solid #bc9457; }
+.small, .note { font-size: 8.5pt; color: var(--muted); }
+
+/* 표지 */
+.cover { display: grid; grid-template-columns: 1fr 62mm; grid-template-rows: auto 1fr; gap: 0 12mm; padding-top: 22mm; }
+.cover h1 { font-size: 40pt; letter-spacing: -.03em; line-height: 1.15; margin: 3mm 0 4mm; }
+.cover h1 span { font-size: 16pt; font-weight: 500; color: var(--muted); margin-left: 3mm; letter-spacing: 0; }
+.cover .lead { font-size: 17pt; font-weight: 700; }
+.cover .sub { font-size: 11pt; color: var(--muted); margin-top: 2mm; }
+.contact { display: grid; grid-template-columns: 34mm 1fr; gap: 1.5mm 4mm; margin-top: 8mm; font-size: 10.5pt; }
+.contact dt { color: var(--muted); }
+.contact dd { margin: 0; font-weight: 600; }
+.cover-r { text-align: center; align-self: start; padding-top: 6mm; }
+.cover-r #qr { display: inline-block; background: #fff; padding: 3mm; border: 1px solid var(--line); }
+.cover-r #qr img { display: block; width: 44mm !important; height: 44mm !important; }
+.cover-r #qr canvas { display: none !important; }
+.cover-r p { font-size: 8.5pt; color: var(--muted); margin-top: 2mm; }
+.cover-shots { grid-column: 1 / -1; align-self: end; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin-bottom: 4mm; }
+.cover-shots img { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: #1d1f19; }
+
+/* 한눈에 보기 */
+.ov-grid { display: grid; grid-template-columns: 1fr 1.35fr; gap: 10mm; }
+.ov-grid h3:first-child { margin-top: 0; }
+.chips { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 1.5mm; }
+.chips li { font-size: 9pt; border: 1px solid #c9c8bb; background: #fff8; padding: .6mm 2.6mm; }
+.hl { margin: 0; padding-left: 5mm; display: grid; gap: 1.5mm; }
+.plist { width: 100%; border-collapse: collapse; font-size: 9pt; }
+.plist th { text-align: left; font-weight: 600; color: var(--muted); border-bottom: 1.5px solid var(--ink); padding: 1.5mm 2mm; }
+.plist td { border-bottom: 1px solid var(--line); padding: 1.8mm 2mm; vertical-align: top; }
+.plist td small { color: #673b12; font-size: 8pt; }
+.plist .pg { text-align: right; font-weight: 700; color: var(--accent); }
+
+/* 작품 소개 쪽 */
+.proj-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 8mm; }
+.hero { width: 100%; aspect-ratio: 16/10; object-fit: contain; background: #1d1f19; display: block; }
+.tldr { display: grid; grid-template-columns: 17mm 1fr; gap: 1.2mm 3mm; margin: 4mm 0 0; padding: 3mm 4mm; background: var(--card); border-left: 2.5px solid var(--accent); font-size: 9.5pt; }
+.tldr dt { font-weight: 700; color: var(--accent); }
+.tldr dd { margin: 0; }
+.links { font-size: 9pt; margin-top: 3mm; }
+.meta { display: grid; grid-template-columns: 13mm 1fr; gap: 1mm 3mm; margin: 0; font-size: 9.5pt; padding-bottom: 3mm; border-bottom: 1px solid var(--line); }
+.meta dt { color: var(--muted); }
+.meta dd { margin: 0; }
+.features { margin: 0; padding-left: 4.5mm; display: grid; gap: 2mm; font-size: 9.3pt; }
+.features strong { display: block; font-size: 9.8pt; }
+
+/* 코드·문제 해결 쪽 */
+.code-grid { display: grid; grid-template-columns: .62fr 1.38fr; gap: 7mm; }
+.story { display: grid; grid-template-columns: 9mm 1fr; gap: 1.5mm 3mm; margin: 0; font-size: 9.3pt; }
+.story dt { font-weight: 700; color: var(--accent); }
+.story dd { margin: 0; }
+.shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5mm; margin-top: 3mm; }
+.shots.two { grid-template-columns: 1fr 1fr; }
+.shots.one { grid-template-columns: 1fr; }
+.shots figure { margin: 0; }
+.shots img { width: 100%; aspect-ratio: 16/10; object-fit: contain; background: #1d1f19; display: block; }
+.shots.one img { aspect-ratio: auto; }
+.shots figcaption { font-size: 7.8pt; color: var(--muted); margin-top: .8mm; }
+.code-grid .col-l > h3:first-child { margin-top: 0; }
+.xnote { font-size: 9.3pt; margin-bottom: 2.5mm; }
+.code { border: 1px solid #3b4035; margin-bottom: 2.5mm; }
+.code-h { display: flex; justify-content: space-between; gap: 3mm; background: #2b2f26; color: var(--paper); padding: 1.3mm 3mm; font-size: 8.5pt; }
+.code-h span { color: #b7bbab; font-family: Consolas, "D2Coding", monospace; font-size: 7.8pt; }
+.code pre { margin: 0; background: #1d1f19; color: #e8e6dc; padding: 2.5mm 3mm; white-space: pre-wrap; }
+.code pre, .code code { font: 7.6pt/1.34 Consolas, "D2Coding", "Malgun Gothic", monospace; tab-size: 4; }
+.code-grid .shots { grid-template-columns: 1fr 1fr; }
+.code-grid .shots.two { grid-template-columns: 1fr 1fr; }
+
+/* 보조작 */
+.minor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9mm; }
+.minor-grid img { width: 100%; aspect-ratio: 2.3/1; object-fit: contain; background: #1d1f19; display: block; margin-bottom: 3mm; }
+.minor-grid h3 { margin: 0 0 1mm; font-size: 13pt; }
+.minor-grid h3 small { font-size: 9pt; font-weight: 500; color: var(--muted); }
+.minor-grid .meta { margin: 3mm 0; }
+.minor-grid .features { font-size: 9pt; }
+
+/* 마지막 쪽 */
+.about { display: grid; grid-template-columns: 26mm 1fr; gap: 3mm 6mm; font-size: 11pt; margin: 0 0 10mm; }
+.about dt { color: var(--muted); }
+.about dd { margin: 0; }
+
+@media print { html, body { background: none; } .page { margin: 0; } }
+.code-grid .col-r > h3:first-child { margin-top: 0; }
+.shots.one img { max-height: 40mm; object-fit: contain; }
+.proj-grid .features { gap: 1.4mm; }
+.proj-grid .features li { line-height: 1.48; }
