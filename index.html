@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="정효준(Gninest)의 게임 클라이언트 프로그래머 포트폴리오. Unity/C#과 C++/DirectX 9로 완성한 게임과 공모전 입상작.">
+<title>정효준 · Game Client Programmer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 바로가기</a>
+<header>
+  <a class="brand" href="#"><span class="brand-icon">G.</span> GNINEST<span class="brand-sub"> / PORTFOLIO</span></a>
+  <nav aria-label="주 메뉴"><a href="#work">프로젝트</a><a href="#approach">개발 경험</a><a href="#about">소개·연락처</a></nav>
+</header>
+<main id="main">
+  <section class="hero wrap">
+    <div class="eyebrow"><span class="dot"></span> GAME CLIENT · GAMEPLAY PROGRAMMER</div>
+    <h1>규칙을 구현하고,<br>플레이로 연결합니다<span class="accent">.</span></h1>
+    <div class="hero-bottom">
+      <p>안녕하세요, 게임 클라이언트 프로그래머 <strong>정효준</strong>입니다.<br>Unity와 C++로 게임을 끝까지 완성해 왔고,<br class="desktop"> 팀 프로젝트 두 편이 공모전에서 입상했습니다.</p>
+      <a class="button dark" href="#work">프로젝트 살펴보기 <span>↘</span></a>
+    </div>
+    <ul class="awards" aria-label="수상">
+      <li><span class="award-year">2025.10</span><strong>게임핑 10분게임 콘테스트 3등</strong><span>HelloDita · 2인 팀 리더</span></li>
+      <li><span class="award-year">2025.06</span><strong>BUD 게임 콘테스트 최우수상(2등)</strong><span>리리아와 마법도서관 · 프로그래밍 전담</span></li>
+    </ul>
+    <div class="hero-strip"><span>UNITY / C#</span><span>C++ / DIRECTX 9 · WINAPI</span><span>GAMEPLAY · TOOLS · UI</span><span class="strip-end" id="strip-count">SELECTED WORKS</span></div>
+  </section>
+
+  <section id="work" class="wrap works">
+    <div class="section-head">
+      <div><span class="eyebrow">01 / SELECTED WORKS</span><h2>직접 만든 플레이 경험</h2></div>
+      <div class="filters" role="group" aria-label="프로젝트 필터">
+        <button class="active" data-filter="all" aria-pressed="true">전체 <small id="count-all"></small></button>
+        <button data-filter="unity" aria-pressed="false">Unity <small id="count-unity"></small></button>
+        <button data-filter="cpp" aria-pressed="false">C++ <small id="count-cpp"></small></button>
+      </div>
+    </div>
+    <div id="featured-list" class="featured-list"></div>
+    <div id="project-list" class="project-list"></div>
+  </section>
+
+  <section id="approach" class="approach">
+    <div class="wrap">
+      <div class="section-head"><div><span class="eyebrow">02 / HOW I BUILD</span><h2>구현에서 완성까지</h2></div><p>작품마다 다른 문제를<br>게임의 동작과 화면으로 풀어냈습니다.</p></div>
+      <div class="approach-grid">
+        <article><span class="topic-num">01 — SYSTEMS</span><h3>여러 기능을 하나의 흐름으로</h3><p>HelloDita에서는 미니게임 6종을 공통 인터페이스와 실행 디렉터로 묶었고, 커비 모작에서는 능력별 캐릭터를 미리 만들어 두고 상태만 넘겨 전환했습니다.</p><button data-project="hellodita">HelloDita 구조 보기 ↗</button></article>
+        <article><span class="topic-num">02 — TOOLS & PERFORMANCE</span><h3>만들기 쉽게, 돌아가게</h3><p>Delver에서는 ImGui 맵 에디터로 스테이지를 만들고, 큐브 맵을 청크로 나눠 절두체 컬링을 적용했습니다. 같은 실내 장면에서 프레임 시간이 약 74% 줄었습니다.</p><button data-project="delver">Delver 컬링 보기 ↗</button></article>
+        <article><span class="topic-num">03 — COLLABORATION</span><h3>함께 끝까지</h3><p>Delver에서는 3인 팀 리더로 PR 153건을 병합하며 통합을 맡았고, HelloDita는 리더로, 리리아는 프로그래밍 전담으로 완성해 입상했습니다.</p><button data-project="lyria">리리아 역할 보기 ↗</button></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="wrap about">
+    <div>
+      <span class="eyebrow">03 / ABOUT & CONTACT</span>
+      <h2>정효준 <span>Gninest</span></h2>
+      <p class="about-intro">게임 클라이언트 · 게임플레이 프로그래머</p>
+      <p>Unity로 완성·배포한 게임과 C++/WinAPI·DirectX 9로 만든 게임을 바탕으로,<br class="desktop">플레이어가 조작하고 이해할 수 있는 게임을 만들고 있습니다.</p>
+      <div class="social">
+        <a href="https://youtube.com/@gninest1641" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
+        <a href="https://gninest.itch.io" target="_blank" rel="noopener noreferrer">itch.io ↗</a>
+        <a href="https://x.com/gninest" target="_blank" rel="noopener noreferrer">개발 일지 · X ↗</a>
+      </div>
+    </div>
+    <div class="contact-fields">
+      <div class="field"><span>교육</span><span>쥬신게임아카데미 C++/DirectX 과정 (2026.04 – 재학 중)<br>SBS아카데미게임학원 Unity 과정 (2023.09 – 2024.09)</span></div>
+      <div class="field"><span>학력</span><span>한신대학교 컴퓨터공학·수리금융 복수전공 졸업 (2024.02)</span></div>
+      <div class="field"><span>자격</span><span>정보처리기사 (2025.09)</span></div>
+      <!-- 연락처·GitHub·이력서 링크는 portfolio.js 맨 위 CONTACT에 넣으면 여기에 표시됩니다. -->
+      <div id="contact-extra"></div>
+    </div>
+  </section>
+</main>
+<footer class="wrap"><span>GNINEST / GAME DEVELOPMENT PORTFOLIO</span><span>모작의 원작 리소스와 외부 에셋 저작권은 각 원저작자에게 있습니다. <a href="#">맨 위로 ↑</a></span></footer>
+<dialog id="project-dialog" aria-labelledby="detail-title">
+  <div class="dialog-shell">
+    <div class="dialog-top"><span class="eyebrow">PROJECT NOTES</span><button id="close-dialog" aria-label="프로젝트 상세 닫기">닫기 ×</button></div>
+    <div id="detail-content"></div>
+  </div>
+</dialog>
+<script src="portfolio.js"></script>
+</body>
+</html>
