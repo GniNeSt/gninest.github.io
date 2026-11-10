@@ -17,7 +17,7 @@ function renderWorks() {
     '<article class="featured project" data-category="' + p.category + '">' +
       '<div class="feature-visual">' + (p.image ? '<img src="' + esc(p.image) + '" alt="' + esc(p.imageAlt) + '" loading="lazy">' : '') +
         '<span class="visual-label">' + String(i + 1).padStart(2, '0') + ' — ' + esc(p.title.toUpperCase()) + '</span></div>' +
-      '<div class="feature-copy">' + (p.award ? '<span class="award">' + esc(p.award) + '</span>' : '') + tagsHTML(p.tags) +
+      '<div class="feature-copy">' + (p.award ? '<span class="award">' + esc(p.award) + '</span>' : '') + (p.activity ? '<span class="activity">' + esc(p.activity) + '</span>' : '') + tagsHTML(p.tags) +
         '<h3>' + esc(p.title) + '</h3><p class="feature-sub">' + esc(p.subtitle) + '</p><p>' + esc(p.summary) + '</p>' +
         '<dl class="feature-role"><dt>기간</dt><dd>' + esc(p.period) + '</dd><dt>담당</dt><dd>' + esc(p.role) + '</dd></dl>' +
         '<button class="text-button" data-project="' + p.id + '">구현과 담당 역할 보기 <span>↗</span></button></div></article>').join('');
@@ -84,7 +84,7 @@ function detailHTML(p) {
   const s = p.story;
   return tagsHTML(p.tags) +
     '<h2 class="detail-title" id="detail-title">' + esc(p.title) + '</h2><p class="detail-intro">' + esc(p.summary) + '</p>' +
-    (p.award ? '<p class="award">' + esc(p.award) + '</p>' : '') +
+    (p.award ? '<p class="award">' + esc(p.award) + '</p>' : '') + (p.activity ? '<p class="activity">' + esc(p.activity) + '</p>' : '') +
     (p.tldr ? '<dl class="tldr">' + p.tldr.map(t => '<dt>' + esc(t[0]) + '</dt><dd>' + esc(t[1]) + '</dd>').join('') + '</dl>' : '') +
     '<div class="detail-meta">' + field('개발 기간', p.period) + field('팀 구성', p.team) + field('플랫폼', p.platform) + field('담당 범위', p.role, true) + '</div>' +
     (p.videos ? videoEmbed(p.videos, p.videoStart) : (p.image ? figures([[p.image, p.imageAlt]]) : '')) +

@@ -238,3 +238,14 @@ figcaption strong { color: var(--ink); margin-right: 2mm; }
 .code-grid { grid-template-columns: 86mm 1fr; }
 .code-grid .col-l .cv { font-size: 6.7pt; }
 .code-grid .col-l .cv-n { flex-basis: 3em; padding-right: .9em; }
+
+/* 수상 아래 활동(전시) 줄 */
+.activity { font-size: 8.6pt; color: #673b12; margin-top: 1.4mm; }
+.activity::before { content: "▸ "; color: #bc9457; }
+/* 증빙 2장(수상 캡처 + 전시 부스) */
+.scene-foot.n2 { grid-template-columns: max-content max-content minmax(0, 1fr); gap: 7mm; }
+.scene-foot.n2 .evidence .frame { height: 54mm; width: auto; }
+.scene-foot.n2 .evidence.e2 .frame { aspect-ratio: 1125 / 1000; background: var(--dark); border: 0; }
+.scene-foot.n2 .evidence figcaption { max-width: 100mm; font-size: 8pt; }
+.scene-foot.n2 .evidence.e2 figcaption { max-width: 61mm; }
+.scene-foot.n2 .evidence figcaption { text-wrap: balance; }

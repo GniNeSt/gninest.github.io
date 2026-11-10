@@ -26,8 +26,9 @@ const projects = [
     title: 'HelloDita', subtitle: '다마고치형 육성 · 대화 · 미니게임',
     tags: ['Unity', 'C#', '2인 팀 리더'],
     award: '게임핑 10분게임 콘테스트(그때 그 게임편) 3등 · 총점 77.177점',
+    activity: 'STOVE 인디 지원 선정 · 제9회 일러스타 페스 인디 부스 체험 전시 (2025.10.03–04, KINTEX)',
     image: 'assets/hellodita-feed.jpg', imageAlt: 'HelloDita 플레이 화면 — 펫이 있는 방과 도구 버튼',
-    tldr: [['내 역할', '2인 팀 리더 · 콘셉트·시스템 설계·Unity 개발·아트·배포'], ['핵심 성과', '게임핑 10분게임 콘테스트 3등 · 미니게임 6종을 공통 구조로 통합'], ['증빙', '플레이 페이지 · 플레이 영상 · 수상 발표 캡처']],
+    tldr: [['내 역할', '2인 팀 리더 · 콘셉트·시스템 설계·Unity 개발·아트·배포'], ['핵심 성과', '게임핑 10분게임 콘테스트 3등 · 일러스타 페스 체험 전시 · 미니게임 6종을 공통 구조로 통합'], ['증빙', '플레이 페이지 · 플레이 영상 · 수상 발표 캡처 · 전시 부스 사진']],
     excerpt: EXCERPTS.hellodita,
     summary: '진로 고민을 다마고치 형식에 담은 내러티브 게임. 여러 미니게임·상태·대화 시스템을 하나의 흐름으로 묶어 완성했습니다.',
     period: '2025.08.05 – 2025.09.30', team: '2인 (본인 팀 리더)', platform: 'PLAYINIT 공개',
@@ -43,7 +44,8 @@ const projects = [
     story: null,
     collaboration: '2인 팀의 리더로 방향을 정하고 개발 전반을 맡았습니다. 미니게임 구성, 채팅 대사, UI 종류, 상호작용 콘텐츠의 세부 기획은 팀원이 담당했습니다.',
     method: '핵심 코드를 직접 작성한 뒤 AI로 리뷰·수정했습니다.',
-    evidenceImages: [['assets/hellodita-award.jpg', '게임핑 10분게임 콘테스트 결과 발표 화면 (3등, 총점 77.177점)']],
+    // 세 번째 값은 PDF에서만 쓰는 원본 사진(private/ 폴더, 저장소에 올리지 않음). 없으면 두 번째 값의 사이트용 이미지를 씁니다.
+    evidenceImages: [['assets/hellodita-award.jpg', '게임핑 10분게임 콘테스트 결과 발표 화면 (3등, 총점 77.177점)'], ['assets/hellodita-booth.jpg', '제9회 일러스타 페스 STOVE 인디 부스 (2025.10.03–04, KINTEX)', 'private/hellodita-booth.jpg']],
     next: '심사평에서 스토리 개연성, 반복 구조, 미니게임·인터랙션 완성도가 아쉬운 점으로 지적됐습니다.',
     links: [['플레이 · PLAYINIT', 'https://playinit.net/games/ditacomolita'], ['플레이 영상', 'https://youtu.be/JLEUmAh-7zA']]
   },

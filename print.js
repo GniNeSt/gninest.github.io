@@ -30,6 +30,8 @@ const features = list => '<ol class="features">' + list.map(f =>
 const fig = (src, cap, cls) => '<figure class="' + (cls || '') + '"><div class="frame"><img src="' + esc(src) + '" alt=""></div>' + (cap ? '<figcaption>' + cap + '</figcaption>' : '') + '</figure>';
 const numCap = (i, title, text) => '<b class="fnum">' + String(i).padStart(2, '0') + '</b><strong>' + esc(title) + '</strong>' + (text ? '<span>' + esc(text) + '</span>' : '');
 const head = (eyebrow, title, slim) => '<header class="ph' + (slim ? ' slim' : '') + '"><p class="eyebrow">' + eyebrow + '</p><h2>' + esc(title) + '</h2></header>';
+// 증빙 이미지: 세 번째 값(private/ 원본)이 있으면 그것을, 파일이 없으면 사이트용 이미지를 씁니다.
+const evidenceFig = (e, i) => '<figure class="evidence e' + (i + 1) + '"><div class="frame"><img src="' + esc(e[2] || e[0]) + '" alt="" data-fallback="' + esc(e[0]) + '"></div><figcaption>' + esc(e[1]) + '</figcaption></figure>';
 const textBlock = (h, t) => t ? '<h3>' + h + '</h3><p>' + esc(t) + '</p>' : '';
 const qrBox = (id, caption) => plain(SITE, '<span class="qr-wrap"><span class="qr" id="' + id + '"></span><span class="qr-cap">' + caption + '</span></span>');
 const QR_CAPTION = '사이트 바로 가기<small>플레이 영상과 상세 설명</small>';
@@ -58,7 +60,7 @@ html += page('overview',
     '<section><h3>지원 분야</h3><p class="big">신입 게임 클라이언트 프로그래머</p><p>Unity/C# · C++/DirectX 9</p></section>' +
     '<section><h3>핵심 기술</h3><ul class="chips">' + ['Unity · C#', 'C++ · STL', 'DirectX 9', 'WinAPI', 'ImGui', 'Git · GitHub PR'].map(c => '<li>' + c + '</li>').join('') + '</ul></section>' +
     '<section><h3>대표 성과</h3><ol class="hl">' +
-      '<li><b>HelloDita</b><span>2인 팀 리더 · 게임핑 10분게임 콘테스트 <em>3등</em></span></li>' +
+      '<li><b>HelloDita</b><span>2인 팀 리더 · 게임핑 10분게임 콘테스트 <em>3등</em> · 일러스타 페스 전시</span></li>' +
       '<li><b>리리아와 마법도서관</b><span>프로그래밍 전담 · BUD 게임 콘테스트 <em>최우수상(2등)</em></span></li>' +
       '<li><b>Delver 모작</b><span>3인 팀 리더 · 청크 절두체 컬링으로 프레임 시간 <em>약 74% 단축</em></span></li></ol></section>' +
   '</div>' +
@@ -93,7 +95,7 @@ mainProjects.forEach((p, idx) => {
   // 3-1. 소개
   html += page('pg-proj',
     '<header class="ph"><p class="eyebrow">' + no + esc(p.subtitle) + '</p><div class="title-row"><h2>' + esc(p.title) + '</h2>' + tags(p.tags) + '</div>' +
-      (p.award ? '<p class="award">' + esc(p.award) + '</p>' : '') + '</header>' +
+      (p.award ? '<p class="award">' + esc(p.award) + '</p>' : '') + (p.activity ? '<p class="activity">' + esc(p.activity) + '</p>' : '') + '</header>' +
     '<div class="proj-grid"><div class="col-l"><div class="frame hero"><img src="' + esc(p.image) + '" alt=""></div>' + tldr(p) + meta(p) + linkRow(p) + '</div>' +
     '<div class="col-r"><h3>핵심 구현</h3>' + features(p.features) + '</div></div>', p.title);
 
@@ -123,7 +125,7 @@ mainProjects.forEach((p, idx) => {
     html += page('pg-scenes',
       head(no + esc(p.title), '구현 장면', true) +
       '<div class="scene-grid">' + sceneFeatures.slice(0, 2).map(sceneFig).join('') + '</div>' +
-      '<div class="scene-foot">' + (p.evidenceImages[0] ? fig(p.evidenceImages[0][0], '<strong>결과 증빙</strong><span>' + esc(p.evidenceImages[0][1]) + '</span>', 'evidence') : '') +
+      '<div class="scene-foot n' + p.evidenceImages.length + '">' + p.evidenceImages.map((e, i) => evidenceFig(e, i)).join('') +
       '<div class="scene-text">' + textBlock('역할과 협업', p.collaboration) + textBlock('개발 방식', p.method) + '</div></div>', p.title);
   }
 
@@ -185,6 +187,8 @@ html += page('closing',
   '<p class="note">모작(별의 커비, 메탈슬러그, Delver)의 원작 리소스와 외부 에셋 저작권은 각 원저작자에게 있습니다.</p>');
 
 document.getElementById('book').innerHTML = html;
+// private/ 원본이 없으면(다른 PC 등) 사이트용 이미지로 바꿉니다.
+document.querySelectorAll('img[data-fallback]').forEach(img => img.addEventListener('error', () => { if (img.src !== new URL(img.dataset.fallback, location.href).href) img.src = img.dataset.fallback; }));
 // 가운뎃점(·) 앞뒤에서 줄이 바뀌지 않게 단어 결합 문자(U+2060)를 넣습니다. 코드 창 안은 건드리지 않습니다.
 const walker = document.createTreeWalker(document.getElementById('book'), NodeFilter.SHOW_TEXT);
 for (let t; (t = walker.nextNode());) if (t.nodeValue.includes('·') && !t.parentElement.closest('.cv-win')) t.nodeValue = t.nodeValue.replace(/(\S)·(?=\S)/g, '$1⁠·⁠');

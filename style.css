@@ -207,3 +207,6 @@ h1{margin:16px 0 22px}
   .code-block summary small{text-align:left}
   .code-list li{font-size:12.5px}
 }
+/* 수상 아래 활동(전시) 줄 */
+.activity{display:block;font-size:13.5px;color:#673b12;margin-top:6px}
+.activity::before{content:"▸ ";color:#bc9457}
