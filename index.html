@@ -7,6 +7,16 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="정효준(Gninest)의 게임 클라이언트 프로그래머 포트폴리오. Unity/C#과 C++/DirectX 9로 완성한 게임과 공모전 입상작.">
 <title>정효준 · Game Client Programmer</title>
+<!-- 링크 공유 미리보기(카카오톡·메일·메신저) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="정효준 · 게임 클라이언트 프로그래머 포트폴리오">
+<meta property="og:description" content="Unity/C# · C++/DirectX 9로 완성한 게임 7편 · 공모전 입상 2회">
+<meta property="og:image" content="https://gninest.github.io/assets/og-image.jpg">
+<meta property="og:url" content="https://gninest.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23242820'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='19' fill='%23f3f1e9' text-anchor='middle'%3EG.%3C/text%3E%3C/svg%3E">
+<!-- 본문 폰트: Pretendard(OFL, 웹 사용 가능) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,11 +33,29 @@
       <p>안녕하세요, 게임 클라이언트 프로그래머 <strong>정효준</strong>입니다.<br>Unity와 C++로 게임을 끝까지 완성해 왔고,<br class="desktop"> 팀 프로젝트 두 편이 공모전에서 입상했습니다.</p>
       <a class="button dark" href="#work">프로젝트 살펴보기 <span>↘</span></a>
     </div>
-    <ul class="awards" aria-label="수상">
-      <li><span class="award-year">2025.10</span><strong>게임핑 10분게임 콘테스트 3등</strong><span>HelloDita · 2인 팀 리더</span></li>
-      <li><span class="award-year">2025.06</span><strong>BUD 게임 콘테스트 최우수상(2등)</strong><span>리리아와 마법도서관 · 프로그래밍 전담</span></li>
-    </ul>
-    <div class="hero-strip"><span>UNITY / C#</span><span>C++ / DIRECTX 9 · WINAPI</span><span>GAMEPLAY · TOOLS · UI</span><span class="strip-end" id="strip-count">SELECTED WORKS</span></div>
+
+    <!-- 30초 요약: 인사담당자가 가장 먼저 찾는 정보 -->
+    <section class="glance" aria-label="한눈에 보기">
+      <div class="glance-item">
+        <span class="glance-label">지원 분야</span>
+        <p><strong>신입 게임 클라이언트 프로그래머</strong><br>Unity/C# · C++/DirectX 9</p>
+      </div>
+      <div class="glance-item">
+        <span class="glance-label">핵심 기술</span>
+        <ul class="chips">
+          <li>Unity · C#</li><li>C++ · STL</li><li>DirectX 9</li><li>WinAPI</li><li>ImGui</li><li>Git · GitHub PR</li>
+        </ul>
+      </div>
+      <div class="glance-item glance-wide">
+        <span class="glance-label">대표 성과</span>
+        <ol class="highlights">
+          <li><button data-project="hellodita"><b>HelloDita</b> 2인 팀 리더 · 게임핑 10분게임 콘테스트 <b>3등</b></button></li>
+          <li><button data-project="lyria"><b>리리아와 마법도서관</b> 프로그래밍 전담 · BUD 게임 콘테스트 <b>최우수상(2등)</b></button></li>
+          <li><button data-project="delver"><b>Delver 모작</b> 3인 팀 리더 · 청크 절두체 컬링으로 프레임 시간 <b>약 74% 단축</b></button></li>
+        </ol>
+      </div>
+    </section>
+
   </section>
 
   <section id="work" class="wrap works">
@@ -67,18 +95,26 @@
       </div>
     </div>
     <div class="contact-fields">
+      <!-- 공개 연락처(구직용 이메일·GitHub)는 portfolio.js 맨 위 CONTACT에 넣으면 여기에 표시됩니다. 전화번호는 넣지 마세요. -->
+      <div id="contact-extra"></div>
       <div class="field"><span>교육</span><span>쥬신게임아카데미 C++/DirectX 과정 (2026.04 – 재학 중)<br>SBS아카데미게임학원 Unity 과정 (2023.09 – 2024.09)</span></div>
       <div class="field"><span>학력</span><span>한신대학교 컴퓨터공학·수리금융 복수전공 졸업 (2024.02)</span></div>
       <div class="field"><span>자격</span><span>정보처리기사 (2025.09)</span></div>
-      <!-- 공개 연락처(구직용 이메일·GitHub)는 portfolio.js 맨 위 CONTACT에 넣으면 여기에 표시됩니다. 전화번호는 넣지 마세요. -->
-      <div id="contact-extra"></div>
     </div>
   </section>
 </main>
 <footer class="wrap"><span>GNINEST / GAME DEVELOPMENT PORTFOLIO</span><span>모작의 원작 리소스와 외부 에셋 저작권은 각 원저작자에게 있습니다. <a href="#">맨 위로 ↑</a></span></footer>
 <dialog id="project-dialog" aria-labelledby="detail-title">
   <div class="dialog-shell">
-    <div class="dialog-top"><span class="eyebrow">PROJECT NOTES</span><button id="close-dialog" aria-label="프로젝트 상세 닫기">닫기 ×</button></div>
+    <div class="dialog-top">
+      <span class="eyebrow">PROJECT NOTES</span>
+      <div class="dialog-actions">
+        <button id="copy-link" aria-label="이 작품 링크 복사">링크 복사</button>
+        <button id="prev-project" aria-label="이전 작품">← 이전</button>
+        <button id="next-project" aria-label="다음 작품">다음 →</button>
+        <button id="close-dialog" aria-label="프로젝트 상세 닫기">닫기 ×</button>
+      </div>
+    </div>
     <div id="detail-content"></div>
   </div>
 </dialog>

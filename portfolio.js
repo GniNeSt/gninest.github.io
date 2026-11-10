@@ -12,7 +12,7 @@
  * - 값이 비어 있으면 "연락처는 지원 서류에 기재"라는 안내만 표시됩니다.
  */
 const CONTACT = {
-  email: '',  // 예: 구직용 이메일
+  email: 'octhj@naver.com',  // 구직용 공개 이메일
   github: ''  // 예: https://github.com/아이디
 };
 
@@ -25,7 +25,8 @@ const projects = [
     title: 'HelloDita', subtitle: '다마고치형 육성 · 대화 · 미니게임',
     tags: ['Unity', 'C#', '2인 팀 리더'],
     award: '게임핑 10분게임 콘테스트(그때 그 게임편) 3등 · 총점 77.177점',
-    image: 'https://img.youtube.com/vi/JLEUmAh-7zA/hqdefault.jpg', imageAlt: 'HelloDita 플레이 영상 썸네일',
+    image: 'assets/hellodita-feed.jpg', imageAlt: 'HelloDita 플레이 화면 — 펫이 있는 방과 도구 버튼',
+    tldr: [['내 역할', '2인 팀 리더 · 콘셉트·시스템 설계·Unity 개발·아트·배포'], ['핵심 성과', '게임핑 10분게임 콘테스트 3등 · 미니게임 6종을 공통 구조로 통합'], ['증빙', '플레이 페이지 · 플레이 영상 · 수상 발표 캡처']],
     summary: '진로 고민을 다마고치 형식에 담은 내러티브 게임. 여러 미니게임·상태·대화 시스템을 하나의 흐름으로 묶어 완성했습니다.',
     period: '2025.08.05 – 2025.09.30', team: '2인 (본인 팀 리더)', platform: 'PLAYINIT 공개',
     videos: ['JLEUmAh-7zA'],
@@ -49,7 +50,8 @@ const projects = [
     title: 'Delver 모작', subtitle: '3D 던전 탐험 · C++/DirectX 9',
     tags: ['C++', 'DirectX 9', 'ImGui', '3인 팀 리더'],
     award: '청크 절두체 컬링 · 같은 실내 장면 프레임 시간 약 74% 단축',
-    image: 'assets/delver-culling-on.jpg', imageAlt: 'Delver 모작 실내 장면 (컬링 ON, 프레임 시간 19.15ms)',
+    image: 'assets/delver-quest.jpg', imageAlt: 'Delver 모작 플레이 화면 — 퀘스트 추적 UI와 랜턴·화염 지팡이',
+    tldr: [['내 역할', '3인 팀 리더 · PR 153건 통합 · 맵 에디터·렌더링·충돌·퀘스트·미니게임 2종'], ['핵심 성과', '청크 절두체 컬링으로 같은 실내 장면 프레임 시간 74.80ms → 19.15ms'], ['증빙', '컬링 ON/OFF 캡처 · 플레이 영상 · Git 이력']],
     summary: '학원 제공 프레임워크 위에서 3인 팀을 이끌며 맵 에디터, 청크 단위 렌더링·컬링, 지형 충돌, 퀘스트와 미니게임을 구현했습니다.',
     period: '2026.09.14 – 2026.10.15', team: '프로그래머 3인 (본인 팀 리더)', platform: 'Windows',
     videos: ['jawLBCFsNAY'],
@@ -80,7 +82,8 @@ const projects = [
     title: '리리아와 마법도서관', subtitle: '원소 규칙 책 배치 퍼즐',
     tags: ['Unity', 'C#', '2인 팀 · 프로그래밍 전담'],
     award: 'BUD 게임 콘테스트 최우수상(2등)',
-    image: 'assets/lyria-title.png', imageAlt: '리리아와 마법도서관 타이틀 화면',
+    image: 'assets/lyria-rules.jpg', imageAlt: '리리아와 마법도서관 플레이 화면 — 규칙 목록과 책장',
+    tldr: [['내 역할', '2인 팀의 프로그래밍 전담 · 캐릭터·로고·UI 아트'], ['핵심 성과', 'BUD 게임 콘테스트 최우수상(2등) · 원소별 인접 규칙 판정과 위반 피드백'], ['증빙', 'itch.io 플레이 · 플레이 영상']],
     summary: '원소마다 다른 규칙을 가진 마법서를 책장에 정리하는 퍼즐. 규칙 판정과 위반 피드백을 구현했습니다.',
     period: '2025.01.20 – 2025.03.05', team: '2인 (기획 1 · 프로그래밍 1)', platform: 'PC · Web',
     videos: ['Ld0Yu-ibStg'], videoStart: 70, // 기존 공유 링크(&t=70s)와 같은 지점부터 재생
@@ -102,7 +105,8 @@ const projects = [
     title: '별의 커비 모작', subtitle: '도팡일당의 습격 · 2D 액션',
     tags: ['C++', 'WinAPI', '개인'],
     award: '',
-    image: 'https://img.youtube.com/vi/cqB-xHE5II4/hqdefault.jpg', imageAlt: '별의 커비 모작 플레이 영상 썸네일',
+    image: 'assets/kirby-ability.jpg', imageAlt: '별의 커비 모작 플레이 화면 — 버블 능력과 능력 아이템',
+    tldr: [['내 역할', '1인 개발 · 학원 제공 뼈대 위에 게임 전체 구현'], ['핵심 성과', '능력 4종 사전 생성·전환, 타일 → 지면 선분·충돌 자동 생성, 보스 패턴'], ['증빙', '플레이 영상 · X 개발 일지']],
     summary: '학원 제공 WinAPI 뼈대 위에 능력 전환, 타일 충돌, 보스와 미니게임까지 1인으로 완성한 2D 액션 모작입니다.',
     period: '2026.07.05 – 2026.07.26', team: '개인', platform: 'Windows',
     videos: ['cqB-xHE5II4'],
@@ -123,7 +127,8 @@ const projects = [
     title: 'PopCorn', subtitle: '2진수 입력 카드 퍼즐',
     tags: ['Unity', 'C#', '개인'],
     award: '',
-    image: 'https://img.youtube.com/vi/ngXkDta6gbc/hqdefault.jpg', imageAlt: 'PopCorn 영상 썸네일',
+    image: 'assets/popcorn-pad.jpg', imageAlt: 'PopCorn 플레이 화면 — 카드 3장과 2진수 숫자 패드',
+    tldr: [['내 역할', '1인 개발 · 기획·프로그래밍 전체'], ['핵심 성과', '2진수 입력 퍼즐과 업그레이드 카드 8종 · Unity Destroy() 지연 삭제 문제 해결'], ['증빙', '개발 영상 · 프로젝트 PDF · 수정 전후 Git 커밋']],
     summary: '8칸 2진수 숫자 패드로 카드의 숫자를 맞추는 UI 퍼즐. 입력 피로도와 업그레이드 카드로 선택의 무게를 더했습니다.',
     period: '2024.07.26 – 2024.08.29', team: '개인', platform: 'PC',
     videos: ['ngXkDta6gbc'],
@@ -151,6 +156,7 @@ const projects = [
     tags: ['Unity', 'C#', '개인', '게임잼'],
     award: '',
     image: 'https://img.youtube.com/vi/G9SND7FjTz0/hqdefault.jpg', imageAlt: 'HoriVerti! 플레이 영상 썸네일',
+    tldr: [['내 역할', '1인 게임잼 출품 · 기획·프로그래밍 (아트·사운드는 Kenney 에셋)'], ['핵심 성과', '처음으로 혼자 완성해 공개하고 플레이어 피드백을 받은 작품'], ['증빙', 'itch.io 플레이 · 게임잼 출품 기록 · 플레이 영상']],
     summary: '가로·세로 연결이 마법이 되는 게임. 처음으로 혼자 완성해 공개하고 플레이어 반응을 받은 작품입니다.',
     period: '2024.07.20 – 2024.07.27', team: '개인', platform: 'HTML5 · 브라우저',
     videos: ['G9SND7FjTz0'],
@@ -169,7 +175,8 @@ const projects = [
     title: '메탈슬러그6 모작', subtitle: '2D 런앤건 · 초기 Unity 학습작',
     tags: ['Unity', 'C#', '개인'],
     award: '',
-    image: 'https://img.youtube.com/vi/3YWSvEDkvD4/hqdefault.jpg', imageAlt: '메탈슬러그6 모작 플레이 영상 썸네일',
+    image: 'assets/metal-run.jpg', imageAlt: '메탈슬러그6 모작 플레이 화면 — 이동하며 사격',
+    tldr: [['내 역할', '1인 개발 · 초기 Unity 학습작'], ['핵심 성과', '상체·하체 Animator 분리로 이동과 사격 동작을 조합'], ['증빙', '플레이 영상 2편']],
     summary: 'Unity를 처음 배우던 시기의 모작. 상체와 하체 애니메이션을 따로 관리해 달리면서 위·아래로 쏘는 조합을 처리했습니다.',
     period: '2024.04 – 2024.06 (Git 기록 기준)', team: '개인', platform: 'Windows',
     role: '프로그래밍 전체 (원작 리소스 사용)',
@@ -190,7 +197,13 @@ const projects = [
 const $ = (s, r = document) => r.querySelector(s);
 const esc = v => String(v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const tagsHTML = tags => '<div class="tags">' + tags.map(t => '<span>' + esc(t) + '</span>').join('') + '</div>';
-const sorted = [...projects].sort((a, b) => a.order - b.order);
+/*
+ * 직무별 보기: 주소에 ?track=cpp 또는 ?track=unity 를 붙이면 그 분야 작품이 먼저 나옵니다(다른 작품도 함께 표시).
+ * 작품 바로가기: 주소 끝에 #delver 처럼 작품 id를 붙이면 그 작품 상세가 바로 열립니다.
+ */
+const TRACK = new URLSearchParams(location.search).get('track');
+const sorted = [...projects].sort((a, b) =>
+  ((TRACK && a.category !== TRACK) - (TRACK && b.category !== TRACK)) || a.order - b.order);
 
 function renderWorks() {
   const featured = sorted.filter(p => p.tier === 'main');
@@ -206,6 +219,7 @@ function renderWorks() {
   $('#project-list').innerHTML = rest.map((p, i) =>
     '<article class="project project-row" data-category="' + p.category + '">' +
       '<span class="project-number">' + String(featured.length + i + 1).padStart(2, '0') + '</span>' +
+      '<button class="row-thumb" data-project="' + p.id + '" tabindex="-1" aria-hidden="true">' + (p.image ? '<img src="' + esc(p.image) + '" alt="" loading="lazy">' : '') + '</button>' +
       '<div class="project-title">' + tagsHTML(p.tags) + '<h3>' + esc(p.title) + '</h3><p>' + esc(p.subtitle) + '</p>' +
         (p.award ? '<span class="award small">' + esc(p.award) + '</span>' : '') + '</div>' +
       '<div class="project-desc"><p>' + esc(p.summary) + '</p><span class="caption">' + esc(p.period) + ' · ' + esc(p.team) + '</span></div>' +
@@ -214,7 +228,8 @@ function renderWorks() {
   $('#count-all').textContent = count;
   $('#count-unity').textContent = projects.filter(p => p.category === 'unity').length;
   $('#count-cpp').textContent = projects.filter(p => p.category === 'cpp').length;
-  $('#strip-count').textContent = 'SELECTED WORKS — ' + String(count).padStart(2, '0');
+  const strip = $('#strip-count');
+  if (strip) strip.textContent = 'SELECTED WORKS — ' + String(count).padStart(2, '0');
 }
 
 function renderContact() {
@@ -252,6 +267,7 @@ function detailHTML(p) {
   return tagsHTML(p.tags) +
     '<h2 class="detail-title" id="detail-title">' + esc(p.title) + '</h2><p class="detail-intro">' + esc(p.summary) + '</p>' +
     (p.award ? '<p class="award">' + esc(p.award) + '</p>' : '') +
+    (p.tldr ? '<dl class="tldr">' + p.tldr.map(t => '<dt>' + esc(t[0]) + '</dt><dd>' + esc(t[1]) + '</dd>').join('') + '</dl>' : '') +
     '<div class="detail-meta">' + field('개발 기간', p.period) + field('팀 구성', p.team) + field('플랫폼', p.platform) + field('담당 범위', p.role, true) + '</div>' +
     (p.videos ? videoEmbed(p.videos, p.videoStart) : (p.image ? figures([[p.image, p.imageAlt]]) : '')) +
     (p.links.length ? '<div class="detail-links">' + p.links.map(l => '<a href="' + esc(l[1]) + '" target="_blank" rel="noopener noreferrer">' + esc(l[0]) + ' ↗</a>').join('') + '</div>' : '') +
@@ -268,14 +284,31 @@ function detailHTML(p) {
 /* ---------- 상호작용 ---------- */
 const dialog = $('#project-dialog');
 const content = $('#detail-content');
-let opener;
+let opener, currentId = null;
 function openProject(id, trigger) {
   const p = projects.find(x => x.id === id);
   if (!p) return;
-  opener = trigger;
+  if (trigger) opener = trigger;
+  currentId = id;
   content.innerHTML = detailHTML(p);
-  dialog.showModal(); dialog.scrollTop = 0; document.body.style.overflow = 'hidden'; $('#close-dialog').focus();
+  if (!dialog.open) dialog.showModal();
+  dialog.scrollTop = 0; document.body.style.overflow = 'hidden'; $('#close-dialog').focus();
+  history.replaceState(null, '', '#' + id); // 작품별 주소(공유용)
 }
+// 이전·다음 작품 (화면에 보이는 순서 기준)
+function stepProject(dir) {
+  const order = sorted.map(p => p.id);
+  const i = order.indexOf(currentId);
+  openProject(order[(i + dir + order.length) % order.length]);
+}
+$('#prev-project').addEventListener('click', () => stepProject(-1));
+$('#next-project').addEventListener('click', () => stepProject(1));
+$('#copy-link').addEventListener('click', async e => {
+  const btn = e.currentTarget, url = location.origin + location.pathname + location.search + '#' + currentId;
+  try { await navigator.clipboard.writeText(url); btn.textContent = '복사됨 ✓'; }
+  catch { prompt('이 주소를 복사하세요', url); }
+  setTimeout(() => { btn.textContent = '링크 복사'; }, 1500);
+});
 document.addEventListener('click', e => {
   const t = e.target.closest('[data-project]');
   if (t) openProject(t.dataset.project, t);
@@ -287,7 +320,10 @@ dialog.addEventListener('click', e => {
   if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dialog.close();
 });
 dialog.addEventListener('close', () => {
-  if (!dialog.open) content.innerHTML = ''; // 영상 재생을 멈추기 위해 내용을 비웁니다(바로 다시 연 경우는 제외).
+  if (!dialog.open) {
+    content.innerHTML = ''; // 영상 재생을 멈추기 위해 내용을 비웁니다(바로 다시 연 경우는 제외).
+    history.replaceState(null, '', location.pathname + location.search);
+  }
   document.body.style.overflow = '';
   if (opener) opener.focus();
 });
@@ -299,3 +335,6 @@ document.querySelectorAll('[data-filter]').forEach(button => button.addEventList
 
 renderWorks();
 renderContact();
+// 주소에 #작품id 가 있으면 해당 작품 상세를 바로 엽니다.
+const startId = location.hash.slice(1);
+if (projects.some(p => p.id === startId)) openProject(startId);
