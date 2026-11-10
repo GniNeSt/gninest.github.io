@@ -28,6 +28,7 @@ const projects = [
     award: '게임핑 10분게임 콘테스트(그때 그 게임편) 3등 · 총점 77.177점',
     activity: 'STOVE 인디 지원 선정 · 제9회 일러스타 페스 인디 부스 체험 전시 (2025.10.03–04, KINTEX)',
     image: 'assets/hellodita-feed.jpg', imageAlt: 'HelloDita 플레이 화면 — 펫이 있는 방과 도구 버튼',
+    cardImage: 'assets/hellodita-title.jpg', // 사이트 목록·대표 카드에만 쓰는 대표 이미지(타이틀 화면). 상세 내용과 PDF 소개 쪽은 image를 씁니다.
     tldr: [['내 역할', '2인 팀 리더 · 콘셉트·시스템 설계·Unity 개발·아트·배포'], ['핵심 성과', '게임핑 10분게임 콘테스트 3등 · 일러스타 페스 체험 전시 · 미니게임 6종을 공통 구조로 통합'], ['증빙', '플레이 페이지 · 플레이 영상 · 수상 발표 캡처 · 전시 부스 사진']],
     excerpt: EXCERPTS.hellodita,
     summary: '진로 고민을 다마고치 형식에 담은 내러티브 게임. 여러 미니게임·상태·대화 시스템을 하나의 흐름으로 묶어 완성했습니다.',

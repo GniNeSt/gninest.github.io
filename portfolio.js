@@ -15,7 +15,7 @@ function renderWorks() {
   const rest = sorted.filter(p => p.tier !== 'main');
   $('#featured-list').innerHTML = featured.map((p, i) =>
     '<article class="featured project" data-category="' + p.category + '">' +
-      '<div class="feature-visual">' + (p.image ? '<img src="' + esc(p.image) + '" alt="' + esc(p.imageAlt) + '" loading="lazy">' : '') +
+      '<div class="feature-visual">' + (p.image ? '<img src="' + esc(p.cardImage || p.image) + '" alt="' + esc(p.imageAlt) + '" loading="lazy">' : '') +
         '<span class="visual-label">' + String(i + 1).padStart(2, '0') + ' — ' + esc(p.title.toUpperCase()) + '</span></div>' +
       '<div class="feature-copy">' + (p.award ? '<span class="award">' + esc(p.award) + '</span>' : '') + (p.activity ? '<span class="activity">' + esc(p.activity) + '</span>' : '') + tagsHTML(p.tags) +
         '<h3>' + esc(p.title) + '</h3><p class="feature-sub">' + esc(p.subtitle) + '</p><p>' + esc(p.summary) + '</p>' +
@@ -24,7 +24,7 @@ function renderWorks() {
   $('#project-list').innerHTML = rest.map((p, i) =>
     '<article class="project project-row" data-category="' + p.category + '">' +
       '<span class="project-number">' + String(featured.length + i + 1).padStart(2, '0') + '</span>' +
-      '<button class="row-thumb" data-project="' + p.id + '" tabindex="-1" aria-hidden="true">' + (p.image ? '<img src="' + esc(p.image) + '" alt="" loading="lazy">' : '') + '</button>' +
+      '<button class="row-thumb" data-project="' + p.id + '" tabindex="-1" aria-hidden="true">' + (p.image ? '<img src="' + esc(p.cardImage || p.image) + '" alt="" loading="lazy">' : '') + '</button>' +
       '<div class="project-title">' + tagsHTML(p.tags) + '<h3>' + esc(p.title) + '</h3><p>' + esc(p.subtitle) + '</p>' +
         (p.award ? '<span class="award small">' + esc(p.award) + '</span>' : '') + '</div>' +
       '<div class="project-desc"><p>' + esc(p.summary) + '</p><span class="caption">' + esc(p.period) + ' · ' + esc(p.team) + '</span></div>' +
