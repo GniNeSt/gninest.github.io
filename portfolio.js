@@ -4,11 +4,16 @@
  * - 값이 빈 문자열/빈 배열이면 화면에 그리지 않습니다(빈칸을 노출하지 않음).
  * - tier: 'main'은 대표작(상단 카드), 'sub'는 목록. order가 작을수록 먼저 표시.
  */
+/*
+ * 공개 연락처 — 이 사이트와 저장소는 누구나 볼 수 있습니다(GitHub Pages는 공개 저장소).
+ * - 공개해도 되는 값만 넣으세요: 구직용 이메일, GitHub 주소 정도.
+ * - 전화번호·주소·생년월일, 그리고 그런 정보가 들어간 이력서 PDF 링크는 넣지 마세요.
+ *   한 번 커밋하면 나중에 지워도 Git 기록에 남습니다. 전화번호는 회사에 직접 내는 이력서에만 적으세요.
+ * - 값이 비어 있으면 "연락처는 지원 서류에 기재"라는 안내만 표시됩니다.
+ */
 const CONTACT = {
-  // 직접 기입: 값을 넣으면 소개 섹션에 표시됩니다.
-  email: '',
-  github: '',
-  resume: '' // 이력서 PDF 링크
+  email: '',  // 예: 구직용 이메일
+  github: ''  // 예: https://github.com/아이디
 };
 
 /* 메탈슬러그 영상 2개를 이어서 반복 재생 (YouTube 재생목록 + loop) */
@@ -212,9 +217,9 @@ function renderWorks() {
 }
 
 function renderContact() {
-  const items = [['이메일', CONTACT.email, CONTACT.email ? 'mailto:' + CONTACT.email : ''], ['GitHub', CONTACT.github, CONTACT.github], ['이력서 PDF', CONTACT.resume ? '다운로드' : '', CONTACT.resume]];
+  const items = [['이메일', CONTACT.email, CONTACT.email ? 'mailto:' + CONTACT.email : ''], ['GitHub', CONTACT.github, CONTACT.github]];
   const html = items.filter(i => i[1]).map(i => '<div class="field"><span>' + i[0] + '</span><a href="' + esc(i[2]) + '" target="_blank" rel="noopener noreferrer">' + esc(i[1]) + '</a></div>').join('');
-  $('#contact-extra').innerHTML = html;
+  $('#contact-extra').innerHTML = html || '<div class="field"><span>연락처</span><span>지원 서류(이력서)에 기재했습니다.</span></div>';
 }
 
 function videoEmbed(ids, start) {
