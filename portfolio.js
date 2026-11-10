@@ -150,9 +150,10 @@ const projects = [
     title: 'HoriVerti!', subtitle: 'Kenney Jam 2024 출품 · 연결 퍼즐 액션',
     tags: ['Unity', 'C#', '개인', '게임잼'],
     award: '',
-    image: '', imageAlt: '',
+    image: 'https://img.youtube.com/vi/G9SND7FjTz0/hqdefault.jpg', imageAlt: 'HoriVerti! 플레이 영상 썸네일',
     summary: '가로·세로 연결이 마법이 되는 게임. 처음으로 혼자 완성해 공개하고 플레이어 반응을 받은 작품입니다.',
     period: '2024.07.20 – 2024.07.27', team: '개인', platform: 'HTML5 · 브라우저',
+    videos: ['G9SND7FjTz0'],
     role: '기획·프로그래밍 (아트·사운드는 잼 규정에 따라 Kenney 에셋 사용)',
     features: [
       ['연결과 공격', '3×3 노드를 잇는 경로를 LineRenderer로 보여 주고, 연결한 노드 수에 비례한 광역 공격을 합니다.'],
@@ -161,7 +162,7 @@ const projects = [
     ],
     code: [], story: null, collaboration: '', method: '', evidenceImages: [],
     next: '플레이어 의견에서 게임 안 규칙 안내와 장기 플레이의 반복성이 지적됐습니다. 원본 소스는 남아 있지 않습니다.',
-    links: [['플레이 · itch.io', 'https://gninest.itch.io/horiverti'], ['게임잼 출품 기록', 'https://itch.io/jam/kenney-jam-2024/rate/2843969']]
+    links: [['플레이 · itch.io', 'https://gninest.itch.io/horiverti'], ['플레이 영상', 'https://youtu.be/G9SND7FjTz0'], ['게임잼 출품 기록', 'https://itch.io/jam/kenney-jam-2024/rate/2843969']]
   },
   {
     id: 'metal', tier: 'sub', order: 7, category: 'unity',
