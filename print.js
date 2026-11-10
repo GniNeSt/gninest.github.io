@@ -35,19 +35,21 @@ const qrBox = (id, caption) => plain(SITE, '<span class="qr-wrap"><span class="q
 const QR_CAPTION = '사이트 바로 가기<small>플레이 영상과 상세 설명</small>';
 
 /* 1. 표지 */
-const coverShots = [['assets/hellodita-feed.jpg', 'HelloDita'], ['assets/delver-quest.jpg', 'Delver 모작'], ['assets/lyria-rules.jpg', '리리아와 마법도서관'], ['assets/popcorn-cards.jpg', 'PopCorn']];
+const coverShots = [['assets/hellodita-title.jpg', 'HelloDita'], ['assets/delver-quest.jpg', 'Delver 모작'], ['assets/lyria-rules.jpg', '리리아와 마법도서관'], ['assets/popcorn-cards.jpg', 'PopCorn']];
 let html = page('cover',
-  '<div class="cover-l">' +
+  '<div class="cover-top"><div class="cover-l">' +
     '<p class="eyebrow">Game Client Programmer · Technical Portfolio</p>' +
     '<h1>정효준<span>Gninest</span></h1>' +
     '<p class="lead">규칙을 구현하고,<br>플레이로 연결합니다.</p>' +
     '<p class="sub">Unity/C# · C++/DirectX 9로 게임 7편을 만들었고,<br>팀 프로젝트 두 편이 공모전에서 입상했습니다.</p>' +
-    '<div class="cover-bottom"><dl class="contact"><dt>이메일</dt><dd>' + link('mailto:' + CONTACT.email, CONTACT.email) + '</dd>' +
-      '<dt>포트폴리오</dt><dd>' + link(SITE, SITE_SHORT) + '</dd>' +
-      '<dt>YouTube</dt><dd>' + link('https://youtube.com/@gninest1641', 'youtube.com/@gninest1641') + '</dd></dl>' +
-      qrBox('qr', QR_CAPTION) + '</div>' +
   '</div>' +
-  '<div class="cover-shots">' + coverShots.map(s => '<figure><div class="frame"><img src="' + s[0] + '" alt=""></div><figcaption>' + s[1] + '</figcaption></figure>').join('') + '</div>');
+  '<div class="cover-shots">' + coverShots.map((s, i) => '<figure class="' + (i ? '' : 'main') + '"><div class="frame"><img src="' + s[0] + '" alt=""></div><figcaption>' + s[1] + '</figcaption></figure>').join('') + '</div></div>' +
+  '<div class="cover-bar"><dl class="contact">' +
+    '<div><dt>이메일</dt><dd>' + link('mailto:' + CONTACT.email, CONTACT.email) + '</dd></div>' +
+    '<div><dt>포트폴리오</dt><dd>' + link(SITE, SITE_SHORT) + '</dd></div>' +
+    '<div><dt>YouTube</dt><dd>' + link('https://youtube.com/@gninest1641', 'youtube.com/@gninest1641') + '</dd></div></dl>' +
+    plain(SITE, '<span class="qr-inline"><span class="qr-cap">사이트 바로 가기<small>플레이 영상과 상세 설명</small></span><span class="qr" id="qr"></span></span>') +
+  '</div>');
 
 /* 2. 한눈에 보기 */
 html += page('overview',
@@ -63,7 +65,7 @@ html += page('overview',
   '<h3 class="list-h">작품 목록</h3><table class="plist"><thead><tr><th>작품</th><th>기간</th><th>형태</th><th>기술</th><th>이 문서에서 볼 내용</th><th class="pg">쪽</th></tr></thead><tbody>' +
     ordered.map(p => '<tr><td>' + link(SITE + '#' + p.id, p.title) + (p.award ? '<small>' + esc(p.award.split(' · ')[0]) + '</small>' : '') + '</td>' +
       '<td class="nw">' + esc(p.period.replace(' (Git 기록 기준)', '')) + '</td><td class="nw">' + esc(p.team) + '</td><td class="nw">' + esc(p.tags.slice(0, 2).join(' · ')) + '</td>' +
-      '<td>' + esc(p.excerpt ? (p.story ? '문제 해결 · ' : '') + '코드 — ' + p.excerpt.title.replace(/ — .*/, '') : p.subtitle) + '</td><td class="pg" data-for="' + p.id + '"></td></tr>').join('') +
+      '<td>' + esc(p.excerpt ? (p.story ? '문제 해결 · ' : '') + '코드 — ' + [p.excerpt, ...(p.extraExcerpts || [])].map(e => e.title.replace(/ — .*/, '').replace(/ \(.*\)/, '')).join(' · ') : p.subtitle) + '</td><td class="pg" data-for="' + p.id + '"></td></tr>').join('') +
   '</tbody></table>');
 
 /* 프레임 흐름 도식 (PopCorn 문제 해결 쪽) — 수정 전후 코드(excerpts.js)의 호출 순서를 그대로 옮긴 것 */
@@ -90,10 +92,10 @@ mainProjects.forEach((p, idx) => {
 
   // 3-1. 소개
   html += page('pg-proj',
-    '<header class="ph"><p class="eyebrow">' + no + esc(p.subtitle) + '</p><h2>' + esc(p.title) + '</h2>' + tags(p.tags) +
+    '<header class="ph"><p class="eyebrow">' + no + esc(p.subtitle) + '</p><div class="title-row"><h2>' + esc(p.title) + '</h2>' + tags(p.tags) + '</div>' +
       (p.award ? '<p class="award">' + esc(p.award) + '</p>' : '') + '</header>' +
-    '<div class="proj-grid"><div class="col-l"><div class="frame hero"><img src="' + esc(p.image) + '" alt=""></div>' + tldr(p) + linkRow(p) + '</div>' +
-    '<div class="col-r">' + meta(p) + '<h3>핵심 구현</h3>' + features(p.features) + '</div></div>', p.title);
+    '<div class="proj-grid"><div class="col-l"><div class="frame hero"><img src="' + esc(p.image) + '" alt=""></div>' + tldr(p) + meta(p) + linkRow(p) + '</div>' +
+    '<div class="col-r"><h3>핵심 구현</h3>' + features(p.features) + '</div></div>', p.title);
 
   // 3-2. 장면 / 문제 해결
   let usedText = false, usedScenes = false;
@@ -141,13 +143,23 @@ mainProjects.forEach((p, idx) => {
       '<p class="xnote wide">' + esc(x.note) + '</p>' +
       '<div class="pair-grid">' + rendered.map(r => '<div>' + r.h + CODEVIEW.noteList(r.notes, r.from) + '</div>').join('') + '</div>' + commit, p.title);
   } else {
-    html += page('pg-code',
-      head(no + esc(p.title), '코드 — ' + x.title.replace(/ — .*/, ''), true) +
-      '<div class="code-grid"><div class="col-l"><p class="xnote">' + esc(x.note) + '</p>' + CODEVIEW.noteList(notes) +
-        rendered.filter((r, i) => leftIdx.includes(i)).map(r => r.h).join('') + side + commit + '</div>' +
-      '<div class="col-r">' + rendered.filter((r, i) => !leftIdx.includes(i)).map(r => r.h).join('') + '</div></div>', p.title);
+    html += codePage(p, no, x, side + commit);
   }
+  // 추가 코드 발췌(예: 커비 보스 패턴)는 쪽을 하나씩 더 만듭니다.
+  (p.extraExcerpts || []).forEach(ex => { html += codePage(p, no, ex, ''); });
 });
+
+/* 코드 쪽: 왼쪽은 설명·번호 설명·짧은 블록, 오른쪽은 긴 블록 */
+function codePage(p, no, x, sideHTML) {
+  const notes = [];
+  const rendered = x.blocks.map(b => CODEVIEW.block(b, notes));
+  const leftIdx = x.leftBlocks || LEFT_BLOCKS[p.id] || [];
+  return page('pg-code',
+    head(no + esc(p.title), '코드 — ' + x.title.replace(/ — .*/, ''), true) +
+    '<div class="code-grid"><div class="col-l"><p class="xnote">' + esc(x.note) + '</p>' + CODEVIEW.noteList(notes) +
+      rendered.filter((h, i) => leftIdx.includes(i)).join('') + sideHTML + '</div>' +
+    '<div class="col-r">' + rendered.filter((h, i) => !leftIdx.includes(i)).join('') + '</div></div>', p.title);
+}
 
 /* 4. 그 밖의 작품: 한 쪽에 두 작품 */
 for (let i = 0; i < minorProjects.length; i += 2) {

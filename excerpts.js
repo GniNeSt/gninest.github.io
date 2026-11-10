@@ -94,6 +94,65 @@ const EXCERPTS = {
     }]
   },
 
+  kirbyBoss: {
+    title: '보스 패턴 상태 머신 (도팡, Daroach)',
+    note: '보스 도팡의 행동을 enum으로 나누고, 행동마다 지속 시간을 표로 둔 상태 머신입니다. 매 프레임 현재 행동만 처리하고, 별·폭탄 탄은 공격 애니메이션의 정해진 프레임에 생성합니다. 별·폭탄 공격이 끝나면 세 번 순간이동한 뒤 다음 패턴을 무작위로 고르며, 빔은 추첨에서 빼서 예고 단계를 거쳐서만 시작합니다.',
+    leftBlocks: [0],
+    blocks: [{
+      label: 'CMonster_Daroach · 행동별 지속 시간', nav: ['CMonster_Daroach'],
+      file: 'DefaultWindow/CMonster_Daroach.h', start: 78, lang: 'cpp',
+      code: String.raw`float   m_fPatternTime[DAROACH_ACTION::DAROACH_ACTION_END]
+{
+    1.f,    //DAROACH_IDLE,
+    1.f,    //DAROACH_BLINK,
+    2.f,    //DAROACH_BEAM_PRE,
+    5.5f,   //DAROACH_BEAM,
+    3.f,    //DAROACH_BOMB,
+    2.f,    //DAROACH_STAR,
+};`
+    }, {
+      label: 'CMonster_Daroach::ActionAttack', nav: ['CMonster_Daroach', 'ActionAttack()'],
+      file: 'DefaultWindow/CMonster_Daroach.cpp', start: 231, lang: 'cpp',
+      code: String.raw`void CMonster_Daroach::ActionAttack()
+{
+    m_pTarget = CSceneMgr::Get_Instance()->Get_Player();
+    switch (m_curDaroachAction)
+    {
+    case CMonster_Daroach::DAROACH_IDLE:
+        m_eCurState = DAROACH_ANIM::DAROACH_IDLE_ANIM;
+        m_iCurArea = 2;
+        MoveTo(m_ptMoveArea[m_iCurArea].m_fX, m_ptMoveArea[m_iCurArea].m_fY, m_fSpeed);
+        if (m_PatternStart + m_fPatternTime[DAROACH_ACTION::DAROACH_IDLE] * 3000.f < GetTickCount()) // ▶ 대기 시간이 지나면 다음 행동을 무작위로 고름
+        {
+            int iNext = (int)DAROACH_ACTION::DAROACH_IDLE;
+
+            for(;iNext == (int)DAROACH_ACTION::DAROACH_IDLE || iNext == (int)DAROACH_ACTION::DAROACH_BEAM;) // ▶ 빔은 추첨에서 빼서 예고(BEAM_PRE)를 거쳐서만 시작
+                iNext = (rand() % DAROACH_ACTION::DAROACH_ACTION_END);
+
+            SetNewAction((DAROACH_ACTION)iNext);
+        }
+        break;
+    case CMonster_Daroach::DAROACH_BLINK:
+        ActionBlink(); // ▶ 순간이동 3회 후 다음 패턴 (별·폭탄 공격이 끝나면 이 단계로 돌아옴)
+        break;
+    case CMonster_Daroach::DAROACH_BEAM_PRE:
+        m_curDaroachAction = DAROACH_ACTION::DAROACH_BEAM; // ▶ 예고 연출·플레이어 높이 추적·발사는 Attack_Beam이 단계별로 처리
+        break;
+    case CMonster_Daroach::DAROACH_BEAM:
+        Attack_Beam();
+        break;
+    case CMonster_Daroach::DAROACH_BOMB:
+        Attack_Bomb();
+        break;
+    case CMonster_Daroach::DAROACH_STAR:
+        Attack_Star();
+        break;
+    //@fold 4 ACTION_END · default
+    }
+}`
+    }]
+  },
+
   popcorn: {
     title: 'Destroy() 지연 삭제 문제 — 수정 전후',
     note: '수정 전에는 Destroy 직후 같은 프레임에서 GetComponent로 카드를 찾아, 곧 사라질 이전 카드가 초기화됐습니다. 수정 후에는 새 카드가 Init() 중 SetEffect(this)로 자기 자신을 슬롯에 등록하고, 슬롯은 그 캐시 참조로 효과를 실행합니다. 이전 카드는 선택 시점에 미리 삭제합니다.',

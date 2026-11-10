@@ -111,7 +111,7 @@ const projects = [
     award: '',
     image: 'assets/kirby-ability.jpg', imageAlt: '별의 커비 모작 플레이 화면 — 버블 능력과 능력 아이템',
     tldr: [['내 역할', '1인 개발 · 학원 제공 뼈대 위에 게임 전체 구현'], ['핵심 성과', '능력 4종 사전 생성·전환, 타일 → 지면 선분·충돌 자동 생성, 보스 패턴'], ['증빙', '플레이 영상 · X 개발 일지']],
-    excerpt: EXCERPTS.kirby,
+    excerpt: EXCERPTS.kirby, extraExcerpts: [EXCERPTS.kirbyBoss],
     summary: '학원 제공 WinAPI 뼈대 위에 능력 전환, 타일 충돌, 보스와 미니게임까지 1인으로 완성한 2D 액션 모작입니다.',
     period: '2026.07.05 – 2026.07.26', team: '개인', platform: 'Windows',
     videos: ['cqB-xHE5II4'],
@@ -119,7 +119,7 @@ const projects = [
     features: [
       ['능력별 객체 전환', '일반·닌자·버블·토네이도 커비를 미리 만들어 두고 활성 플래그로 전환합니다. 변신 시 위치·HP·방향을 이어받고 전용 변신 애니메이션을 재생하며, 비활성 객체는 갱신·렌더링에서 제외합니다.', 'assets/kirby-ability.jpg', '버블 능력 상태. 아래 화면에는 저장한 능력 아이템'],
       ['타일 → 충돌 데이터', '저장한 타일을 불러와 종류별로 평지·경사 지면 선분과 충돌 사각형을 자동 생성하고, 런타임에는 이 선분과 사각형으로 충돌을 처리합니다.'],
-      ['입력과 보스', '최근 입력을 기억하는 버퍼로 더블 탭 대시를 판정하고, enum 기반 상태 머신으로 보스 패턴(순간이동·빔·폭탄·별)을 구성했습니다.', 'assets/kirby-boss.jpg', '보스 데로치 전투(토네이도 능력)'],
+      ['입력과 보스', '최근 입력을 기억하는 버퍼로 더블 탭 대시를 판정하고, enum 기반 상태 머신으로 보스 패턴(순간이동·빔·폭탄·별)을 구성했습니다.', 'assets/kirby-boss.jpg', '보스 도팡 전투(토네이도 능력)'],
       ['게임 구성', '튜토리얼 · 메인 스테이지 2개 · 보스, 창작 미니게임, 월드맵(스테이지 선택), 인트로 컷신.']
     ],
     code: ['CSceneMgr::CreatePlayer · Set_Player — 능력 전환', 'CTileMgr::SaveTile · LoadTile · UseTile — 타일·충돌 생성', 'CPlayer::RememberKeyDown · ComboCheck — 입력 버퍼', 'CMonster_Daroach — 보스 패턴'],

@@ -94,7 +94,7 @@ function detailHTML(p) {
     (s ? block('문제 해결 사례', '<dl class="story"><dt>문제</dt><dd>' + esc(s.problem) + '</dd><dt>원인</dt><dd>' + esc(s.cause) + '</dd><dt>해결</dt><dd>' + esc(s.fix) + '</dd><dt>검증</dt><dd>' + esc(s.result) + '</dd></dl>' + figures(s.images)) : '') +
     block('역할과 협업', p.collaboration ? '<p>' + esc(p.collaboration) + '</p>' : '') +
     block('구현 구조', p.code.length ? '<ul class="code-list">' + p.code.map(c => '<li>' + esc(c) + '</li>').join('') + '</ul>' : '') +
-    block('코드 발췌', excerptHTML(p.excerpt, false)) +
+    block('코드 발췌', excerptHTML(p.excerpt, false) + (p.extraExcerpts || []).map(x => excerptHTML(x, false)).join('')) +
     block('결과 증빙', figures(p.evidenceImages)) +
     block('개발 방식', p.method ? '<p>' + esc(p.method) + '</p>' : '') +
     block('회고 · 다음 개선', p.next ? '<p>' + esc(p.next) + '</p>' : '');
