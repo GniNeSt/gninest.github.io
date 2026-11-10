@@ -210,3 +210,6 @@ h1{margin:16px 0 22px}
 /* 수상 아래 활동(전시) 줄 */
 .activity{display:block;font-size:13.5px;color:#673b12;margin-top:6px}
 .activity::before{content:"▸ ";color:#bc9457}
+/* 결과 증빙: 사진 틀 높이를 맞추고(남는 곳은 어두운 배경), 설명 줄이 같은 높이에서 시작 */
+.evidence-grid{align-items:start}
+.evidence-grid img{aspect-ratio:1020/520;height:auto;object-fit:contain;background:#1d1f19;display:block}

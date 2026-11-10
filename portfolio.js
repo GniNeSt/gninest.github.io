@@ -62,8 +62,8 @@ function videoEmbed(ids, start) {
 function field(label, value, wide) {
   return value ? '<div class="field' + (wide ? ' wide' : '') + '"><span>' + label + '</span><span>' + esc(value) + '</span></div>' : '';
 }
-function figures(list) {
-  return list.length ? '<div class="figure-grid">' + list.map(f => '<figure class="detail-figure"><img src="' + esc(f[0]) + '" alt="' + esc(f[1]) + '" loading="lazy"><figcaption>' + esc(f[1]) + '</figcaption></figure>').join('') + '</div>' : '';
+function figures(list, cls) {
+  return list.length ? '<div class="figure-grid' + (cls ? ' ' + cls : '') + '">' + list.map(f => '<figure class="detail-figure"><img src="' + esc(f[0]) + '" alt="' + esc(f[1]) + '" loading="lazy"><figcaption>' + esc(f[1]) + '</figcaption></figure>').join('') + '</div>' : '';
 }
 function block(title, inner) { return inner ? '<section class="detail-block"><h4>' + title + '</h4>' + inner + '</section>' : ''; }
 // 코드 발췌: 사이트에서는 접힌 상태(<details>)로 보여 줍니다. (인쇄용 print.js에는 펼친 상태로 같은 내용을 그립니다)
@@ -95,7 +95,7 @@ function detailHTML(p) {
     block('역할과 협업', p.collaboration ? '<p>' + esc(p.collaboration) + '</p>' : '') +
     block('구현 구조', p.code.length ? '<ul class="code-list">' + p.code.map(c => '<li>' + esc(c) + '</li>').join('') + '</ul>' : '') +
     block('코드 발췌', excerptHTML(p.excerpt, false) + (p.extraExcerpts || []).map(x => excerptHTML(x, false)).join('')) +
-    block('결과 증빙', figures(p.evidenceImages)) +
+    block('결과 증빙', figures(p.evidenceImages, 'evidence-grid')) +
     block('개발 방식', p.method ? '<p>' + esc(p.method) + '</p>' : '') +
     block('회고 · 다음 개선', p.next ? '<p>' + esc(p.next) + '</p>' : '');
 }
