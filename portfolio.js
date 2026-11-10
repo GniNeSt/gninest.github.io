@@ -69,11 +69,15 @@ function block(title, inner) { return inner ? '<section class="detail-block"><h4
 // 코드 발췌: 사이트에서는 접힌 상태(<details>)로 보여 줍니다. (인쇄용 print.js에는 펼친 상태로 같은 내용을 그립니다)
 function excerptHTML(x, open) {
   if (!x) return '';
+  // 코드 창은 codeview.js가 그립니다(VS 다크 테마·원본 줄 번호). ▶ 설명은 블록마다 아래에 번호 목록으로 붙습니다.
+  const notes = [];
   return '<p class="excerpt-note"><strong>' + esc(x.title) + '</strong> — ' + esc(x.note) + '</p>' +
-    x.blocks.map(b => '<details class="code-block"' + (open ? ' open' : '') + '><summary><span>' + esc(b.label) + '</span><small>' + esc(b.file) + ' · ' + esc(b.lines) + '</small></summary>' +
-      '<pre><code class="lang-' + esc(b.lang) + '">' + esc(b.code) + '</code></pre></details>').join('') +
-    (x.commit ? '<p class="detail-note"><a href="' + esc(x.commit) + '" target="_blank" rel="noopener noreferrer">GitHub에서 수정 커밋 보기 ↗</a></p>' : '') +
-    '<p class="detail-note">원본 저장소에서 본인 작성 부분만 옮겼습니다. "// …"는 생략, "// ▶"는 설명용으로 덧붙인 주석입니다.</p>';
+    x.blocks.map(b => {
+      const from = notes.length, view = CODEVIEW.block(b, notes);
+      return '<details class="code-block"' + (open ? ' open' : '') + '><summary><span>' + esc(b.label) + '</span><small>' + esc(b.file.split('/').pop()) + ' · ' + CODEVIEW.range(b) + '행</small></summary>' +
+        view + CODEVIEW.noteList(notes.slice(from), from) + '</details>';
+    }).join('') +
+    (x.commit ? '<p class="detail-note"><a href="' + esc(x.commit) + '" target="_blank" rel="noopener noreferrer">GitHub에서 수정 커밋 보기 ↗</a></p>' : '');
 }
 
 function detailHTML(p) {

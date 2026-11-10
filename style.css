@@ -179,5 +179,31 @@ h1{margin:16px 0 22px}
 .code-block summary span::before{content:"▸ ";color:var(--yellow)}
 .code-block[open] summary span::before{content:"▾ "}
 .code-block summary small{font-weight:400;color:#b7bbab;font-size:12.5px;font-family:Consolas,"D2Coding",monospace}
-.code-block pre{margin:0;padding:14px 16px;overflow:auto;max-height:520px}
-.code-block code{font:13px/1.55 Consolas,"D2Coding","Malgun Gothic",monospace;white-space:pre;tab-size:4}
+/* 코드 창(codeview.css) 안쪽 배치 */
+.code-block{background:transparent;color:inherit;border:1px solid var(--line)}
+.code-block .cv{font-size:13px}
+.code-block .cv-win{border:0}
+.code-block .cv-body{max-height:560px;overflow:auto}
+.code-block .cv-notes{padding:10px 14px 12px;margin:0;font-size:14px;background:var(--paper)}
+@media(max-width:800px){.code-block .cv{font-size:11.5px}.code-block .cv-path{display:none}}
+.code-block .cv-cap{display:none}
+.code-block .cv-notes li{margin:0;padding:0}
+
+/* ---------- 좁은 화면(모바일) 보완 ---------- */
+/* 긴 파일 경로·코드 이름이 상세 창을 옆으로 밀어내지 않게 */
+.dialog-shell{overflow-x:hidden}
+#detail-content,#detail-content *{min-width:0}
+#detail-content p,#detail-content li,#detail-content dd{overflow-wrap:anywhere}
+.code-list li{overflow-wrap:anywhere}
+.code-block summary span{min-width:0}
+.code-block summary small{overflow-wrap:anywhere;text-align:right}
+@media(max-width:800px){
+  dialog#project-dialog{width:100vw;max-width:100vw;max-height:100dvh;height:100dvh;margin:0;border:0}
+  .dialog-shell{padding:14px 16px 28px}
+  .dialog-top{position:sticky;top:0;z-index:2;background:var(--paper);margin:-14px -16px 18px;padding:10px 16px;border-bottom:1px solid var(--line)}
+  .dialog-actions{justify-content:flex-start}
+  .dialog-actions button{padding:6px 10px}
+  .code-block summary{flex-direction:column;align-items:flex-start;gap:2px}
+  .code-block summary small{text-align:left}
+  .code-list li{font-size:12.5px}
+}

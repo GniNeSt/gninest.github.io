@@ -1,16 +1,18 @@
 /*
  * 코드 발췌 (2026-11-10)
- * - 각 작품 원본 저장소에서 본인이 작성한 부분만 그대로 옮겼습니다(Git 기록 기준).
- * - 줄인 부분은 "// …" 주석으로 표시했고, 설명을 위해 덧붙인 주석은 "// ▶"로 시작합니다.
- *   그 외에는 원본과 같습니다(빈 줄 일부만 정리).
- * - data.js의 각 작품에서 excerpt: EXCERPTS.작품id 로 연결합니다.
+ * - 각 작품 원본 저장소에서 본인이 작성한 부분을 줄 번호 그대로 옮겼습니다(Git 기록 기준).
+ * - start: 원본 파일에서 첫 줄의 줄 번호. 공통 들여쓰기만 줄였고(탭은 공백 4칸), 그 외 내용은 원본과 같습니다.
+ * - "//@fold N 설명" 줄은 원본 N줄을 접어서(생략) 보여 줍니다. 줄 번호는 그만큼 건너뜁니다.
+ * - 줄 끝의 "// ▶ 설명"은 원본 코드에 없는 설명입니다. 화면에서는 코드에서 빠지고 번호 표시와 아래 설명 목록으로 나옵니다.
+ * - data.js의 각 작품에서 excerpt: EXCERPTS.작품id 로 연결합니다. 그리는 코드는 codeview.js에 있습니다.
  */
 const EXCERPTS = {
   delver: {
     title: '청크 AABB 절두체 판정',
     note: '청크 경계 상자(AABB)의 꼭짓점 8개를 뷰·투영 행렬로 클립 공간에 보낸 뒤, 6개 평면 중 하나라도 8개 모두 바깥이면 이 청크를 그리지 않습니다. 큐브마다가 아니라 청크마다 한 번만 판정해서 판정 비용도 줄였습니다.',
     blocks: [{
-      label: 'CStaticCubeMap::Is_Visible', file: 'Client/Code/CStaticCubeMap.cpp', lines: '371–400', lang: 'cpp',
+      label: 'CStaticCubeMap::Is_Visible', nav: ['CStaticCubeMap', 'Is_Visible(RUNTIME_CHUNK& chunk, _matrix& matrixOut)'],
+      file: 'Client/Code/CStaticCubeMap.cpp', start: 371, lang: 'cpp',
       code: String.raw`bool CStaticCubeMap::Is_Visible(RUNTIME_CHUNK& chunk, _matrix& matrixOut)
 {
     _vec3& vMin = chunk.tInfo.vMin;
@@ -26,8 +28,8 @@ const EXCERPTS = {
     for (_vec3& vec : vVertex)  //정점이 절두체 나가있는지 확인
     {
         D3DXVECTOR4 q;
-        D3DXVec3Transform(&q, &vec, &matrixOut);
-        bVertexOut[0] &= q.x < -q.w;        //왼
+        D3DXVec3Transform(&q, &vec, &matrixOut); // ▶ 꼭짓점을 뷰·투영 행렬로 클립 공간에 보냄
+        bVertexOut[0] &= q.x < -q.w;        //왼 // ▶ 평면마다 '꼭짓점이 모두 바깥인가'를 AND로 누적
         bVertexOut[1] &= q.x > q.w;         //오
         bVertexOut[2] &= q.y < -q.w;        //아래
         bVertexOut[3] &= q.y > q.w;         //위
@@ -37,7 +39,7 @@ const EXCERPTS = {
 
     for (bool outside : bVertexOut)
         if (outside)
-            return false;       // 청크 꼭짓점 8개가 모두 바깥이면 제외
+            return false;       // 청크 꼭짓점 8개가 모두 바깥이면 제외 // ▶ 한 평면이라도 해당되면 청크 전체를 그리지 않음
 
     return true;
 }`
@@ -48,41 +50,46 @@ const EXCERPTS = {
     title: '능력 객체 전환',
     note: '능력별 커비 객체를 미리 만들어 두고, 변신할 때는 새로 생성하지 않고 활성 플래그만 바꿉니다. 이전 객체의 위치·HP·바라보는 방향을 새 객체로 넘기고, 이전 객체는 비활성화해서 갱신·렌더링 대상에서 빠지게 합니다.',
     blocks: [{
-      label: 'CSceneMgr::Set_Player', file: 'DefaultWindow/CSceneMgr.cpp', lines: '416–472', lang: 'cpp',
+      label: 'CSceneMgr::Set_Player', nav: ['CSceneMgr', 'Set_Player(KIRBY_ABILITY ePlayerID)'],
+      file: 'DefaultWindow/CSceneMgr.cpp', start: 416, lang: 'cpp',
       code: String.raw`void CSceneMgr::Set_Player(KIRBY_ABILITY ePlayerID)
 {
-	if (m_eCurPlayerID == ePlayerID) return;
-	if (ePlayerID != KIRBY_ABILITY::ABILITY_NORMAL)
-	{
-		// … 변신 효과음·이펙트 재생, 1초 연출 정지, 남아 있는 능력 별 정리 (생략)
-	}
+    if (m_eCurPlayerID == ePlayerID) return;
+    if (ePlayerID != KIRBY_ABILITY::ABILITY_NORMAL)
+    {
+        //@fold 19 변신 효과음·이펙트 재생, 1초 연출 정지, 남아 있는 능력 별 정리
+    }
 
-	CUIMgr::Get_Instance()->SetPlayerAbilityUI(ePlayerID);
+    CUIMgr::Get_Instance()->SetPlayerAbilityUI(ePlayerID);
 
-	CObj* prePlayer = Get_Player();
 
-	m_eCurPlayerID = ePlayerID;
+    CObj* prePlayer = Get_Player();
 
-	CObj* curPlayer = Get_Player();
+    m_eCurPlayerID = ePlayerID;
 
-	curPlayer->SetObjIsUnused(false);
-	curPlayer->SetPos(prePlayer->GetInfo()->fX, prePlayer->GetInfo()->fY);
+    CObj* curPlayer = Get_Player();
 
-	prePlayer->SetObjIsUnused(true);
-	prePlayer->SetPos(-100, -100);
 
-	CPlayer* pPlayer = dynamic_cast<CPlayer*>(curPlayer);
+    curPlayer->SetObjIsUnused(false); // ▶ 미리 만들어 둔 능력 객체를 활성화(새로 생성하지 않음)
+    curPlayer->SetPos(prePlayer->GetInfo()->fX, prePlayer->GetInfo()->fY); // ▶ 이전 객체의 위치를 이어받음
 
-	dynamic_cast<CPlayer*>(prePlayer)->GetStatus(pPlayer->GetHpPoint(), pPlayer->GetFaceDirPoint());
 
-	curPlayer->Update_Rect();
-	prePlayer->Update_Rect();
+    prePlayer->SetObjIsUnused(true); // ▶ 이전 객체는 비활성화해 갱신·렌더링에서 제외
+    prePlayer->SetPos(-100, -100);
 
-	if (ePlayerID != KIRBY_ABILITY::ABILITY_NORMAL)
-	{
-		pPlayer->SetHyper();
-		pPlayer->SetPlayerAnim();
-	}
+    CPlayer* pPlayer = dynamic_cast<CPlayer*>(curPlayer);
+
+    dynamic_cast<CPlayer*>(prePlayer)->GetStatus(pPlayer->GetHpPoint(), pPlayer->GetFaceDirPoint()); // ▶ 이전 객체의 HP·바라보는 방향을 새 객체로 넘김
+
+    curPlayer->Update_Rect();
+    prePlayer->Update_Rect();
+
+
+    if (ePlayerID != KIRBY_ABILITY::ABILITY_NORMAL)
+    {
+        pPlayer->SetHyper();
+        pPlayer->SetPlayerAnim();
+    }
 }`
     }]
   },
@@ -92,28 +99,31 @@ const EXCERPTS = {
     note: '수정 전에는 Destroy 직후 같은 프레임에서 GetComponent로 카드를 찾아, 곧 사라질 이전 카드가 초기화됐습니다. 수정 후에는 새 카드가 Init() 중 SetEffect(this)로 자기 자신을 슬롯에 등록하고, 슬롯은 그 캐시 참조로 효과를 실행합니다. 이전 카드는 선택 시점에 미리 삭제합니다.',
     commit: 'https://github.com/GniNeSt/POPCORN_DEMO/commit/72e8fb9483c361281fbfeb98da16898f38ea380c',
     blocks: [{
-      label: '수정 전 — ItemManager.SetItem (커밋 67c2186)', file: 'Assets/2.Scripts/Manager/ItemManager.cs', lines: '66–85', lang: 'csharp',
+      label: '수정 전 · 커밋 67c2186', caption: '수정 전 · 커밋 67c2186', nav: ['ItemManager', 'SetItem'],
+      file: 'Assets/2.Scripts/Manager/ItemManager.cs', start: 66, lang: 'csharp',
       code: String.raw`foreach (var i in _ico)
 {
-    // … 카드 종류(Type) 결정 (생략)
+    //@fold 5 카드 종류(Type) 결정
+
     ItemCardCtrlObj icco = i.transform.GetChild(0).gameObject.GetComponent<ItemCardCtrlObj>();
     if(icco != null)
     {
-        Destroy(icco);   // ▶ 실제 삭제는 프레임 끝
+        Destroy(icco); // ▶ Destroy는 프레임이 끝날 때 실제로 삭제됨
     }
 
     i.transform.GetChild(0).gameObject.AddComponent(itemName);
-    i.transform.GetChild(0).GetComponent<ItemCardCtrlObj>().Init();   // ▶ 아직 남아 있는 이전 카드를 찾음
+    i.transform.GetChild(0).GetComponent<ItemCardCtrlObj>().Init(); // ▶ 같은 프레임이라 아직 남아 있는 이전 카드가 초기화됨
 
     i.AppearCard();
     i.transform.GetChild(0).GetChild(0).GetChild(3).gameObject.SetActive(true);
 }`
     }, {
-      label: '수정 후 — ItemCtrlObj (커밋 72e8fb9)', file: 'Assets/2.Scripts/Object/ItemCtrlObj.cs', lines: '14–36', lang: 'csharp',
+      label: '수정 후 · 커밋 72e8fb9', caption: '수정 후 · 커밋 72e8fb9', nav: ['ItemCtrlObj', 'SetEffect(ItemCardCtrlObj obj)'],
+      file: 'Assets/2.Scripts/Object/ItemCtrlObj.cs', start: 14, lang: 'csharp',
       code: String.raw`[SerializeField] ItemCardCtrlObj _icco;
 public void OnClick()
 {
-    _icco.CardEffect();          // ▶ GetComponent 대신 캐시 참조
+    _icco.CardEffect(); // ▶ GetComponent 대신 캐시해 둔 참조로 효과 실행
 
     transform.parent.GetComponent<ItemManager>().ItemSelect();
 }
@@ -124,13 +134,13 @@ public void SetItem(System.Type type)
     transform.GetChild(0).GetChild(0).GetChild(3).gameObject.SetActive(true);
     AppearCard();
 }
-public void SetEffect(ItemCardCtrlObj obj)   // ▶ 새 카드가 Init() 중 SetEffect(this)로 등록
+public void SetEffect(ItemCardCtrlObj obj) // ▶ 새 카드가 Init() 중 SetEffect(this)로 자신을 등록
 {
     _icco = obj;
 }
 public void RemoveCard()
 {
-    Destroy(_icco);              // ▶ 카드를 고른 시점에 미리 삭제
+    Destroy(_icco); // ▶ 카드를 고른 시점에 미리 삭제
     GetComponent<Animator>().Play("ItemCardRemove");
 }`
     }]
@@ -140,13 +150,14 @@ public void RemoveCard()
     title: '흙 마법서 규칙 판정',
     note: '각 책은 오른쪽으로 2D 레이(RaycastAll)를 쏴서 범위 안의 책을 검사합니다. 흙 마법서는 범위 안의 불·물 마법서 개수가 같아야 하고, 어긋나면 위반한 규칙 번호(ErrorNum)를 남겨 UI가 해당 규칙을 빨간색으로 표시합니다.',
     blocks: [{
-      label: 'OrganizeBookCtrl.ErrorCheck — 흙(Ocher) 분기', file: 'Assets/2.Scripts/OrganizeBookCtrl.cs', lines: '137–169', lang: 'csharp',
+      label: 'OrganizeBookCtrl.ErrorCheck · 흙(Ocher) 분기', nav: ['OrganizeBookCtrl', 'ErrorCheck'],
+      file: 'Assets/2.Scripts/OrganizeBookCtrl.cs', start: 137, lang: 'csharp',
       code: String.raw`case BookType.Ocher:
     if (!_sm.IsOnStage)
         return true;
-    // … 주석 처리된 이전 코드 (생략)
+    //@fold 2 주석 처리된 이전 코드
     countR = 0; countB = 0;
-    foreach (RaycastHit2D hit in hits)
+    foreach (RaycastHit2D hit in hits) // ▶ 오른쪽으로 쏜 레이에 맞은, 범위 안의 책들
     {
         if (hit.transform.GetComponent<OrganizeBookCtrl>() == null)
         {
@@ -162,12 +173,12 @@ public void RemoveCard()
             countB++;
         }
     }
-    if (countR != countB)
+    if (countR != countB) // ▶ 흙 규칙: 범위 안의 불·물 마법서 개수가 같아야 함
     {
         //Debug.Log("OcherError!!!");
         _error = true;
         _errorBook = this;
-        ErrorNum = 1;
+        ErrorNum = 1; // ▶ 위반한 규칙 번호 → UI가 해당 규칙을 빨간색으로 표시
         return true;
     }
     ErrorNum = -1;
@@ -180,7 +191,8 @@ public void RemoveCard()
     title: '미니게임 공통 인터페이스와 결과 판정',
     note: '모든 미니게임은 IMinigame을 구현하고, 결과 형태가 다른 게임만 선택 인터페이스를 추가로 구현합니다. 디렉터는 개별 게임을 몰라도 인터페이스 종류에 따라 결과를 판정하고, 시간 초과는 패배로 처리합니다.',
     blocks: [{
-      label: 'IMinigame · IMinigameResult', file: 'Scripts/Minigame/IMinigame.cs · IMinigameResult.cs', lines: '전체', lang: 'csharp',
+      label: 'IMinigame', nav: ['IMinigame'],
+      file: 'Scripts/Minigame/IMinigame.cs', start: 3, lang: 'csharp',
       code: String.raw`public interface IMinigame
 {
     /// <summary>미니게임 시작(상태 초기화 포함)</summary>
@@ -194,27 +206,31 @@ public void RemoveCard()
 
     /// <summary>완료 시 호출(성공/실패는 디렉터가 타임아웃으로 판정)</summary>
     event Action Finished; // 플레이어가 미션 완료했을 때만 호출
-}
-public interface IMinigameResult
+}`
+    }, {
+      label: 'IMinigameResult', nav: ['IMinigameResult'],
+      file: 'Scripts/Minigame/IMinigameResult.cs', start: 1, lang: 'csharp',
+      code: String.raw`public interface IMinigameResult
 {
     bool WasSuccess { get; }
 }`
     }, {
-      label: 'MinigameDirector.CoRunMinigame — 결과 판정부', file: 'Scripts/Minigame/MinigameDirector.cs', lines: '225–242', lang: 'csharp',
+      label: 'MinigameDirector.CoRunMinigame · 결과 판정부', nav: ['MinigameDirector', 'CoRunMinigame'],
+      file: 'Scripts/Minigame/MinigameDirector.cs', start: 225, lang: 'csharp',
       code: String.raw`// 결과 판정
 MinigameOutcome outcome;
-if (entry.logic is IMinigameOutcomeProvider op)
+if (entry.logic is IMinigameOutcomeProvider op) // ▶ 결과(Outcome)를 직접 넘기는 게임
 {
     outcome = op.Outcome;
     if (!finished && t >= playMaxSeconds) outcome = MinigameOutcome.Lose; // 타임아웃은 패배
     success = (outcome == MinigameOutcome.Win);
 }
-else if (entry.logic is IMinigameResult r)
+else if (entry.logic is IMinigameResult r) // ▶ 성공 여부만 넘기는 게임
 {
     success = finished && r.WasSuccess;
     outcome = success ? MinigameOutcome.Win : MinigameOutcome.Lose;
 }
-else
+else // ▶ 완료 이벤트만 있는 게임: 시간 안에 끝내면 승리
 {
     success = finished; // 끝냈으면 승리, 아니면 패배
     outcome = success ? MinigameOutcome.Win : MinigameOutcome.Lose;
