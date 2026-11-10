@@ -104,6 +104,8 @@ const projects = [
     story: null,
     collaboration: '팀원이 아이디어, 팀 리더, 퍼즐 레벨 디자인을 맡았고, 저는 Unity 개발 전체와 아트·UI를 맡았습니다.',
     method: '', evidenceImages: [],
+    // PDF(기술서)에만 넣는 사진. private/ 폴더는 저장소에 올리지 않으며, 사이트에서는 쓰지 않습니다.
+    pdfOnlyImages: [['private/lyria-award.webp', 'BUD 게임 콘테스트 최우수상(2등) 시상']],
     next: '대사와 진행이 코드에 직접 들어 있어, 데이터로 분리하고 판정을 이벤트 기반으로 바꾸는 것을 다음 개선 방향으로 보고 있습니다.',
     links: [['플레이 · itch.io', 'https://gninest.itch.io/ly'], ['플레이 영상', 'https://www.youtube.com/watch?v=Ld0Yu-ibStg'], ['작품 소개', 'https://mandlemandle.com/projects/e9dca2']]
   },

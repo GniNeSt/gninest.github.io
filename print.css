@@ -249,3 +249,6 @@ figcaption strong { color: var(--ink); margin-right: 2mm; }
 .scene-foot.n2 .evidence figcaption { max-width: 100mm; font-size: 8pt; }
 .scene-foot.n2 .evidence.e2 figcaption { max-width: 61mm; }
 .scene-foot.n2 .evidence figcaption { text-wrap: balance; }
+.side-shot .frame.photo { aspect-ratio: 4 / 3; }
+.intro-evidence { margin-top: 6mm; }
+.intro-evidence .frame { aspect-ratio: 16 / 9; }

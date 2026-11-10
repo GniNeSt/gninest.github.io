@@ -32,6 +32,8 @@ const numCap = (i, title, text) => '<b class="fnum">' + String(i).padStart(2, '0
 const head = (eyebrow, title, slim) => '<header class="ph' + (slim ? ' slim' : '') + '"><p class="eyebrow">' + eyebrow + '</p><h2>' + esc(title) + '</h2></header>';
 // 증빙 이미지: 세 번째 값(private/ 원본)이 있으면 그것을, 파일이 없으면 사이트용 이미지를 씁니다.
 const evidenceFig = (e, i) => '<figure class="evidence e' + (i + 1) + '"><div class="frame"><img src="' + esc(e[2] || e[0]) + '" alt="" data-fallback="' + esc(e[0]) + '"></div><figcaption>' + esc(e[1]) + '</figcaption></figure>';
+// PDF 전용 사진(수상 사진 등, private/ 폴더): 작품 소개 쪽 오른쪽 아래에 둡니다.
+const pdfOnly = p => (p.pdfOnlyImages || []).map(e => '<figure class="intro-evidence pdf-only"><div class="frame"><img src="' + esc(e[0]) + '" alt=""></div><figcaption><strong>수상 증빙</strong>' + esc(e[1]) + '</figcaption></figure>').join('');
 const textBlock = (h, t) => t ? '<h3>' + h + '</h3><p>' + esc(t) + '</p>' : '';
 const qrBox = (id, caption) => plain(SITE, '<span class="qr-wrap"><span class="qr" id="' + id + '"></span><span class="qr-cap">' + caption + '</span></span>');
 const QR_CAPTION = '사이트 바로 가기<small>플레이 영상과 상세 설명</small>';
@@ -97,7 +99,7 @@ mainProjects.forEach((p, idx) => {
     '<header class="ph"><p class="eyebrow">' + no + esc(p.subtitle) + '</p><div class="title-row"><h2>' + esc(p.title) + '</h2>' + tags(p.tags) + '</div>' +
       (p.award ? '<p class="award">' + esc(p.award) + '</p>' : '') + (p.activity ? '<p class="activity">' + esc(p.activity) + '</p>' : '') + '</header>' +
     '<div class="proj-grid"><div class="col-l"><div class="frame hero"><img src="' + esc(p.image) + '" alt=""></div>' + tldr(p) + meta(p) + linkRow(p) + '</div>' +
-    '<div class="col-r"><h3>핵심 구현</h3>' + features(p.features) + '</div></div>', p.title);
+    '<div class="col-r"><h3>핵심 구현</h3>' + features(p.features) + pdfOnly(p) + '</div></div>', p.title);
 
   // 3-2. 장면 / 문제 해결
   let usedText = false, usedScenes = false;
@@ -188,6 +190,8 @@ html += page('closing',
 
 document.getElementById('book').innerHTML = html;
 // private/ 원본이 없으면(다른 PC 등) 사이트용 이미지로 바꿉니다.
+// PDF 전용 사진(private/)이 없는 환경이면 그 칸을 통째로 뺍니다.
+document.querySelectorAll('.pdf-only img').forEach(img => img.addEventListener('error', () => img.closest('figure').remove()));
 document.querySelectorAll('img[data-fallback]').forEach(img => img.addEventListener('error', () => { if (img.src !== new URL(img.dataset.fallback, location.href).href) img.src = img.dataset.fallback; }));
 // 가운뎃점(·) 앞뒤에서 줄이 바뀌지 않게 단어 결합 문자(U+2060)를 넣습니다. 코드 창 안은 건드리지 않습니다.
 const walker = document.createTreeWalker(document.getElementById('book'), NodeFilter.SHOW_TEXT);
