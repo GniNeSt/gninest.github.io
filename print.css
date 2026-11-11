@@ -252,3 +252,24 @@ figcaption strong { color: var(--ink); margin-right: 2mm; }
 .side-shot .frame.photo { aspect-ratio: 4 / 3; }
 .intro-evidence { margin-top: 6mm; }
 .intro-evidence .frame { aspect-ratio: 16 / 9; }
+
+/* 구조 다이어그램 · 플레이 피드백 */
+.dg-fig { margin: 4mm 0 0; padding: 3mm; background: #fffdf7; border: 1px solid var(--line); }
+.timeline .dg { margin-top: 1mm; }
+.pg-minor .col-r h3 { margin-top: 5mm; }
+.pg-minor .col-r > h3:first-child { margin-top: 0; }
+.fb-intro { font-size: 8.8pt; color: var(--muted); margin-bottom: 2.5mm; }
+.feedback { list-style: none; margin: 0; padding: 0; display: grid; gap: 2.8mm; }
+.feedback li { border-left: 2.5px solid var(--line); padding-left: 3.5mm; }
+.feedback .fb-q { font-size: 9pt; color: var(--muted); }
+.feedback .fb-a { font-size: 9.2pt; margin-top: .8mm; line-height: 1.55; }
+.fb-state { display: inline-block; font-size: 7.4pt; font-weight: 700; padding: 0 1.6mm; margin-right: 2mm; border: 1px solid #bc9457; color: #673b12; vertical-align: .3mm; }
+.fb-state.done { background: #e6efe4; border-color: #8fb08a; color: #2f6b3a; }
+.code-grid .dg-fig { padding: 2mm; margin-top: 3mm; }
+.code-grid .dg-fig .dg { width: 92%; margin: 0 auto; }
+.pg-story .story-side { grid-template-columns: 1fr 1.15fr; }
+.pg-story .timeline { margin-top: 4mm; }
+.pg-story .timeline h3 { margin: 2.5mm 0 1mm; }
+.method-list { margin: 1.5mm 0 0; padding-left: 4.5mm; display: grid; gap: 1.5mm; font-size: 9.6pt; line-height: 1.6; }
+.method-list code, .pg-code p code { font: 8.6pt Consolas, "D2Coding", monospace; background: #e6e3d7; padding: 0 1mm; }
+.cv-cap .cap-link { font-size: 8pt; font-weight: 500; margin-left: 2.5mm; }

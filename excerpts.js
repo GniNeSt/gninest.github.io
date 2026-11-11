@@ -47,8 +47,8 @@ const EXCERPTS = {
   },
 
   kirby: {
-    title: '능력 객체 전환',
-    note: '능력별 커비 객체를 미리 만들어 두고, 변신할 때는 새로 생성하지 않고 활성 플래그만 바꿉니다. 이전 객체의 위치·HP·바라보는 방향을 새 객체로 넘기고, 이전 객체는 비활성화해서 갱신·렌더링 대상에서 빠지게 합니다.',
+    title: '능력 객체 전환', diagram: 'kirbyAbility',
+    note: '능력별 객체를 미리 만들어 두고, 변신할 때는 활성 플래그만 바꿔 전환합니다.',
     blocks: [{
       label: 'CSceneMgr::Set_Player', nav: ['CSceneMgr', 'Set_Player(KIRBY_ABILITY ePlayerID)'],
       file: 'DefaultWindow/CSceneMgr.cpp', start: 416, lang: 'cpp',
@@ -70,16 +70,16 @@ const EXCERPTS = {
     CObj* curPlayer = Get_Player();
 
 
-    curPlayer->SetObjIsUnused(false); // ▶ 미리 만들어 둔 능력 객체를 활성화(새로 생성하지 않음)
-    curPlayer->SetPos(prePlayer->GetInfo()->fX, prePlayer->GetInfo()->fY); // ▶ 이전 객체의 위치를 이어받음
+    curPlayer->SetObjIsUnused(false); // ▶ 새로 만들지 않고 활성화
+    curPlayer->SetPos(prePlayer->GetInfo()->fX, prePlayer->GetInfo()->fY); // ▶ 위치 이어받기
 
 
-    prePlayer->SetObjIsUnused(true); // ▶ 이전 객체는 비활성화해 갱신·렌더링에서 제외
+    prePlayer->SetObjIsUnused(true); // ▶ 비활성 → 갱신·렌더링 제외
     prePlayer->SetPos(-100, -100);
 
     CPlayer* pPlayer = dynamic_cast<CPlayer*>(curPlayer);
 
-    dynamic_cast<CPlayer*>(prePlayer)->GetStatus(pPlayer->GetHpPoint(), pPlayer->GetFaceDirPoint()); // ▶ 이전 객체의 HP·바라보는 방향을 새 객체로 넘김
+    dynamic_cast<CPlayer*>(prePlayer)->GetStatus(pPlayer->GetHpPoint(), pPlayer->GetFaceDirPoint()); // ▶ HP·방향 복사
 
     curPlayer->Update_Rect();
     prePlayer->Update_Rect();
@@ -95,22 +95,9 @@ const EXCERPTS = {
   },
 
   kirbyBoss: {
-    title: '보스 패턴 상태 머신 (도팡, Daroach)',
-    note: '보스 도팡의 행동을 enum으로 나누고, 행동마다 지속 시간을 표로 둔 상태 머신입니다. 매 프레임 현재 행동만 처리하고, 별·폭탄 탄은 공격 애니메이션의 정해진 프레임에 생성합니다. 별·폭탄 공격이 끝나면 세 번 순간이동한 뒤 다음 패턴을 무작위로 고르며, 빔은 추첨에서 빼서 예고 단계를 거쳐서만 시작합니다.',
-    leftBlocks: [0],
+    title: '보스 패턴 상태 머신 (도팡, Daroach)', diagram: 'kirbyBoss',
+    note: '행동을 enum으로 나눈 상태 머신입니다. 별·폭탄 탄은 애니메이션의 정해진 프레임에 만들고, 빔은 반드시 예고 단계를 거칩니다.',
     blocks: [{
-      label: 'CMonster_Daroach · 행동별 지속 시간', nav: ['CMonster_Daroach'],
-      file: 'DefaultWindow/CMonster_Daroach.h', start: 78, lang: 'cpp',
-      code: String.raw`float   m_fPatternTime[DAROACH_ACTION::DAROACH_ACTION_END]
-{
-    1.f,    //DAROACH_IDLE,
-    1.f,    //DAROACH_BLINK,
-    2.f,    //DAROACH_BEAM_PRE,
-    5.5f,   //DAROACH_BEAM,
-    3.f,    //DAROACH_BOMB,
-    2.f,    //DAROACH_STAR,
-};`
-    }, {
       label: 'CMonster_Daroach::ActionAttack', nav: ['CMonster_Daroach', 'ActionAttack()'],
       file: 'DefaultWindow/CMonster_Daroach.cpp', start: 231, lang: 'cpp',
       code: String.raw`void CMonster_Daroach::ActionAttack()
@@ -206,8 +193,8 @@ public void RemoveCard()
   },
 
   lyria: {
-    title: '흙 마법서 규칙 판정',
-    note: '각 책은 오른쪽으로 2D 레이(RaycastAll)를 쏴서 범위 안의 책을 검사합니다. 흙 마법서는 범위 안의 불·물 마법서 개수가 같아야 하고, 어긋나면 위반한 규칙 번호(ErrorNum)를 남겨 UI가 해당 규칙을 빨간색으로 표시합니다.',
+    title: '흙 마법서 규칙 판정', diagram: 'lyria',
+    note: '책마다 오른쪽 범위의 책을 레이로 검사합니다. 흙 마법서는 범위 안의 불·물 마법서 개수가 같아야 합니다.',
     blocks: [{
       label: 'OrganizeBookCtrl.ErrorCheck · 흙(Ocher) 분기', nav: ['OrganizeBookCtrl', 'ErrorCheck'],
       file: 'Assets/2.Scripts/OrganizeBookCtrl.cs', start: 137, lang: 'csharp',
@@ -247,8 +234,8 @@ public void RemoveCard()
   },
 
   hellodita: {
-    title: '미니게임 공통 인터페이스와 결과 판정',
-    note: '모든 미니게임은 IMinigame을 구현하고, 결과 형태가 다른 게임만 선택 인터페이스를 추가로 구현합니다. 디렉터는 개별 게임을 몰라도 인터페이스 종류에 따라 결과를 판정하고, 시간 초과는 패배로 처리합니다.',
+    title: '미니게임 공통 인터페이스와 결과 판정', diagram: 'hellodita',
+    note: '디렉터는 개별 게임을 몰라도 인터페이스 종류로 결과를 판정하고, 시간 초과는 패배로 처리합니다.',
     blocks: [{
       label: 'IMinigame', nav: ['IMinigame'],
       file: 'Scripts/Minigame/IMinigame.cs', start: 3, lang: 'csharp',

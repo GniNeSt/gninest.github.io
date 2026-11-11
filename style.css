@@ -213,3 +213,18 @@ h1{margin:16px 0 22px}
 /* 결과 증빙: 사진 틀 높이를 맞추고(남는 곳은 어두운 배경), 설명 줄이 같은 높이에서 시작 */
 .evidence-grid{align-items:start}
 .evidence-grid img{aspect-ratio:1020/520;height:auto;object-fit:contain;background:#1d1f19;display:block}
+/* 구조 다이어그램 · 플레이 피드백 */
+.diagram{margin:14px 0 0;padding:16px;background:#fffdf7;border:1px solid var(--line)}
+.diagram .dg{max-width:560px;margin:0 auto}
+.diagram .dg[viewBox^="0 0 1000"]{max-width:none}
+.feedback{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.feedback li{border-left:3px solid var(--line);padding:2px 0 2px 14px}
+.feedback .fb-q{margin:0;color:var(--muted);font-size:14.5px}
+.feedback .fb-a{margin:4px 0 0}
+.fb-state{display:inline-block;font-size:12px;font-weight:700;padding:1px 7px;margin-right:8px;border:1px solid #bc9457;color:#673b12;vertical-align:1px}
+.fb-state.done{background:#e6efe4;border-color:#8fb08a;color:#2f6b3a}
+/* 개발 방식 목록 · 좁은 화면에서 넓은 다이어그램은 가로 스크롤 */
+.method-list{margin:8px 0 0;padding-left:18px;display:grid;gap:6px}
+.method-list code,.detail-block p code{font:13.5px Consolas,"D2Coding",monospace;background:#ebe8dd;padding:0 4px}
+.diagram{overflow-x:auto}
+@media(max-width:800px){.diagram .dg[viewBox^="0 0 1000"]{width:900px;max-width:none}.diagram .dg[viewBox^="0 0 520"]{width:560px;max-width:none}}

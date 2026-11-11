@@ -34,7 +34,12 @@ const head = (eyebrow, title, slim) => '<header class="ph' + (slim ? ' slim' : '
 const evidenceFig = (e, i) => '<figure class="evidence e' + (i + 1) + '"><div class="frame"><img src="' + esc(e[2] || e[0]) + '" alt="" data-fallback="' + esc(e[0]) + '"></div><figcaption>' + esc(e[1]) + '</figcaption></figure>';
 // PDF 전용 사진(수상 사진 등, private/ 폴더): 작품 소개 쪽 오른쪽 아래에 둡니다.
 const pdfOnly = p => (p.pdfOnlyImages || []).map(e => '<figure class="intro-evidence pdf-only"><div class="frame"><img src="' + esc(e[0]) + '" alt=""></div><figcaption><strong>수상 증빙</strong>' + esc(e[1]) + '</figcaption></figure>').join('');
-const textBlock = (h, t) => t ? '<h3>' + h + '</h3><p>' + esc(t) + '</p>' : '';
+const dgFig = id => DIAGRAMS[id] ? '<figure class="dg-fig">' + DIAGRAMS[id]() + '</figure>' : '';
+// 플레이 피드백 → 개선 [피드백, 대응, 구현 여부]
+const feedbackList = list => list && list.length ? '<ol class="feedback">' + list.map(f => '<li><p class="fb-q">“' + esc(f[0]) + '”</p><p class="fb-a"><span class="fb-state' + (f[2] ? ' done' : '') + '">' + (f[2] ? '리메이크에 구현' : '리메이크 설계') + '</span>' + esc(f[1]) + '</p></li>').join('') + '</ol>' : '';
+const rich = t => esc(t).replace(/`([^`]+)`/g, '<code>$1</code>');
+// 문자열이면 문단, 배열이면 첫 줄 문단 + 나머지 목록
+const textBlock = (h, t) => !t || !t.length ? '' : '<h3>' + h + '</h3>' + (typeof t === 'string' ? '<p>' + rich(t) + '</p>' : '<p>' + rich(t[0]) + '</p>' + (t.length > 1 ? '<ul class="method-list">' + t.slice(1).map(x => '<li>' + rich(x) + '</li>').join('') + '</ul>' : ''));
 const qrBox = (id, caption) => plain(SITE, '<span class="qr-wrap"><span class="qr" id="' + id + '"></span><span class="qr-cap">' + caption + '</span></span>');
 const QR_CAPTION = '사이트 바로 가기<small>플레이 영상과 상세 설명</small>';
 
@@ -72,19 +77,6 @@ html += page('overview',
       '<td>' + esc(p.excerpt ? (p.story ? '문제 해결 · ' : '') + '코드 — ' + [p.excerpt, ...(p.extraExcerpts || [])].map(e => e.title.replace(/ — .*/, '').replace(/ \(.*\)/, '')).join(' · ') : p.subtitle) + '</td><td class="pg" data-for="' + p.id + '"></td></tr>').join('') +
   '</tbody></table>');
 
-/* 프레임 흐름 도식 (PopCorn 문제 해결 쪽) — 수정 전후 코드(excerpts.js)의 호출 순서를 그대로 옮긴 것 */
-const step = (t, d, cls) => '<li class="' + (cls || '') + '"><b>' + t + '</b>' + (d ? '<span>' + d + '</span>' : '') + '</li>';
-const TIMELINES = {
-  popcorn: '<div class="timeline"><h3>프레임 흐름</h3>' +
-    '<div class="lane"><p class="lane-h">수정 전</p><div class="frame-box"><p>같은 프레임 안</p><ol>' +
-      step('<code>Destroy</code>(이전 카드)', '삭제 예약만 됨') + step('<code>AddComponent</code>(새 카드)') + step('<code>GetComponent().Init()</code>', '아직 남은 이전 카드가 반환·초기화', 'bad') + '</ol></div>' +
-      '<div class="frame-end"><p>프레임 끝</p><ol>' + step('이전 카드 삭제', '새 카드는 초기화되지 않은 채 남음', 'bad') + '</ol></div></div>' +
-    '<div class="lane"><p class="lane-h">수정 후</p><div class="frame-box"><p>카드를 고른 프레임</p><ol>' +
-      step('<code>RemoveCard()</code>', 'Destroy(이전 카드)를 미리 호출') + '</ol></div>' +
-      '<div class="frame-box"><p>새 카드를 놓는 프레임</p><ol>' + step('<code>AddComponent</code> → <code>Init()</code>') + step('<code>SetEffect(this)</code>', '새 카드가 슬롯에 자신을 등록', 'good') + '</ol></div>' +
-      '<div class="frame-box"><p>클릭할 때</p><ol>' + step('<code>OnClick()</code>', '캐시 참조로 효과 실행', 'good') + '</ol></div></div></div>'
-};
-
 /* 3. 작품별 페이지 */
 const pageOf = {};
 const LEFT_BLOCKS = { hellodita: [1] };   // 코드 쪽에서 왼쪽 열로 보낼 짧은 블록
@@ -120,7 +112,7 @@ mainProjects.forEach((p, idx) => {
     html += page('pg-story',
       head(no + esc(p.title), '문제 해결 — Destroy() 지연 삭제', true) +
       '<div class="story-side">' + (f ? sceneFig(f) : '') +
-      '<dl class="story">' + story4(s).map(r => '<dt>' + r[0] + '</dt><dd>' + esc(r[1]) + '</dd>').join('') + '</dl></div>' + (TIMELINES[p.id] || ''), p.title);
+      '<dl class="story">' + story4(s).map(r => '<dt>' + r[0] + '</dt><dd>' + esc(r[1]) + '</dd>').join('') + '</dl></div>' + (s.diagram ? '<div class="timeline"><h3>프레임 흐름 — Unity 생명주기</h3>' + DIAGRAMS[s.diagram]() + '</div>' : ''), p.title);
   } else if (sceneFeatures.length >= 2 || p.evidenceImages.length) {
     // 구현 장면 (HelloDita) — 장면 2장 크게 + 증빙과 협업
     usedText = usedScenes = true;
@@ -145,7 +137,7 @@ mainProjects.forEach((p, idx) => {
     html += page('pg-code pair',
       head(no + esc(p.title), '코드 — 수정 전과 후', true) +
       '<p class="xnote wide">' + esc(x.note) + '</p>' +
-      '<div class="pair-grid">' + rendered.map(r => '<div>' + r.h + CODEVIEW.noteList(r.notes, r.from) + '</div>').join('') + '</div>' + commit, p.title);
+      '<div class="pair-grid">' + rendered.map((r, i) => '<div>' + (i === rendered.length - 1 && x.commit ? r.h.replace('</figcaption>', ' <a class="cap-link" href="' + esc(x.commit) + '">GitHub 커밋 보기 ↗</a></figcaption>') : r.h) + CODEVIEW.noteList(r.notes, r.from) + '</div>').join('') + '</div>', p.title);
   } else {
     html += codePage(p, no, x, side + commit);
   }
@@ -160,20 +152,23 @@ function codePage(p, no, x, sideHTML) {
   const leftIdx = x.leftBlocks || LEFT_BLOCKS[p.id] || [];
   return page('pg-code',
     head(no + esc(p.title), '코드 — ' + x.title.replace(/ — .*/, ''), true) +
-    '<div class="code-grid"><div class="col-l"><p class="xnote">' + esc(x.note) + '</p>' + CODEVIEW.noteList(notes) +
-      rendered.filter((h, i) => leftIdx.includes(i)).join('') + sideHTML + '</div>' +
+    '<div class="code-grid"><div class="col-l"><p class="xnote">' + esc(x.note) + '</p>' + (x.diagram ? dgFig(x.diagram) : '') + CODEVIEW.noteList(notes) +
+      rendered.filter((h, i) => leftIdx.includes(i)).join('') + (x.diagram ? '' : sideHTML) + '</div>' +
     '<div class="col-r">' + rendered.filter((h, i) => !leftIdx.includes(i)).join('') + '</div></div>', p.title);
 }
 
-/* 4. 그 밖의 작품: 한 쪽에 두 작품 */
-for (let i = 0; i < minorProjects.length; i += 2) {
-  const pair = minorProjects.slice(i, i + 2);
-  pair.forEach(p => { pageOf[p.id] = pageNo + 1; });
-  html += page('minor',
-    head('More works', '그 밖의 작품', true) + '<div class="minor-grid">' +
-    pair.map(p => '<article><div class="frame"><img src="' + esc(p.image) + '" alt=""></div><h3>' + esc(p.title) + '<small>' + esc(p.subtitle) + '</small></h3>' + tags(p.tags) +
-      meta(p) + features(p.features) + linkRow(p) + '</article>').join('') + '</div>');
-}
+/* 4. 그 밖의 작품: 작품마다 한 쪽 — 왼쪽은 이미지·요약·기본 정보, 오른쪽은 핵심 구현 + 구조 다이어그램 또는 플레이 피드백 */
+minorProjects.forEach((p, k) => {
+  pageOf[p.id] = pageNo + 1;
+  const no = '<b>' + String(mainProjects.length + k + 1).padStart(2, '0') + '</b>';
+  html += page('pg-proj pg-minor',
+    '<header class="ph"><p class="eyebrow">' + no + esc(p.subtitle) + '</p><div class="title-row"><h2>' + esc(p.title) + '</h2>' + tags(p.tags) + '</div></header>' +
+    '<div class="proj-grid"><div class="col-l"><div class="frame hero"><img src="' + esc(p.image) + '" alt=""></div>' + tldr(p) + meta(p) + linkRow(p) + '</div>' +
+    '<div class="col-r"><h3>핵심 구현</h3>' + features(p.features) +
+      ((p.diagrams || []).length ? '<h3>구조</h3>' + p.diagrams.map(dgFig).join('') : '') +
+      (p.feedback ? '<h3>플레이 피드백 → 리메이크</h3><p class="fb-intro">' + esc(p.next) + '</p>' + feedbackList(p.feedback) : '') +
+    '</div></div>', p.title);
+});
 
 /* 5. 교육·자격·연락 */
 html += page('closing',

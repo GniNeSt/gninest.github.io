@@ -65,6 +65,19 @@ function field(label, value, wide) {
 function figures(list, cls) {
   return list.length ? '<div class="figure-grid' + (cls ? ' ' + cls : '') + '">' + list.map(f => '<figure class="detail-figure"><img src="' + esc(f[0]) + '" alt="' + esc(f[1]) + '" loading="lazy"><figcaption>' + esc(f[1]) + '</figcaption></figure>').join('') + '</div>' : '';
 }
+// 구조 다이어그램(diagrams.js)
+function diagramHTML(id) { return DIAGRAMS[id] ? '<figure class="diagram">' + DIAGRAMS[id]() + '</figure>' : ''; }
+// 플레이 피드백과 대응 [피드백, 대응, 구현 여부]
+function feedbackHTML(list) {
+  return list && list.length ? '<ol class="feedback">' + list.map(f => '<li><p class="fb-q">“' + esc(f[0]) + '”</p><p class="fb-a"><span class="fb-state' + (f[2] ? ' done' : '') + '">' + (f[2] ? '리메이크에 구현' : '리메이크 설계') + '</span>' + esc(f[1]) + '</p></li>').join('') + '</ol>' : '';
+}
+// 개발 방식: 문자열이면 문단, 배열이면 첫 줄 문단 + 나머지 목록. `코드`는 코드 글꼴
+const rich = t => esc(t).replace(/`([^`]+)`/g, '<code>$1</code>');
+function methodHTML(m) {
+  if (!m || !m.length) return '';
+  if (typeof m === 'string') return '<p>' + rich(m) + '</p>';
+  return '<p>' + rich(m[0]) + '</p>' + (m.length > 1 ? '<ul class="method-list">' + m.slice(1).map(x => '<li>' + rich(x) + '</li>').join('') + '</ul>' : '');
+}
 function block(title, inner) { return inner ? '<section class="detail-block"><h4>' + title + '</h4>' + inner + '</section>' : ''; }
 // 코드 발췌: 사이트에서는 접힌 상태(<details>)로 보여 줍니다. (인쇄용 print.js에는 펼친 상태로 같은 내용을 그립니다)
 function excerptHTML(x, open) {
@@ -91,13 +104,14 @@ function detailHTML(p) {
     (p.links.length ? '<div class="detail-links">' + p.links.map(l => '<a href="' + esc(l[1]) + '" target="_blank" rel="noopener noreferrer">' + esc(l[0]) + ' ↗</a>').join('') + '</div>' : '') +
     block('핵심 구현', '<ul class="feature-list">' + p.features.map(f => '<li><strong>' + esc(f[0]) + '</strong><br>' + esc(f[1]) +
       (f[2] ? '<figure class="detail-figure feature-shot"><img src="' + esc(f[2]) + '" alt="' + esc(f[3] || f[0]) + '" loading="lazy"><figcaption>' + esc(f[3] || '') + '</figcaption></figure>' : '') + '</li>').join('') + '</ul>') +
-    (s ? block('문제 해결 사례', '<dl class="story"><dt>문제</dt><dd>' + esc(s.problem) + '</dd><dt>원인</dt><dd>' + esc(s.cause) + '</dd><dt>해결</dt><dd>' + esc(s.fix) + '</dd><dt>검증</dt><dd>' + esc(s.result) + '</dd></dl>' + figures(s.images)) : '') +
+    block('구조 한눈에 보기', (p.diagrams || []).map(diagramHTML).join('')) +
+    block('플레이 피드백 → 개선', feedbackHTML(p.feedback)) +
+    (s ? block('문제 해결 사례', '<dl class="story"><dt>문제</dt><dd>' + esc(s.problem) + '</dd><dt>원인</dt><dd>' + esc(s.cause) + '</dd><dt>해결</dt><dd>' + esc(s.fix) + '</dd><dt>검증</dt><dd>' + esc(s.result) + '</dd></dl>' + figures(s.images) + (s.diagram ? diagramHTML(s.diagram) : '')) : '') +
     block('역할과 협업', p.collaboration ? '<p>' + esc(p.collaboration) + '</p>' : '') +
-    block('구현 구조', p.code.length ? '<ul class="code-list">' + p.code.map(c => '<li>' + esc(c) + '</li>').join('') + '</ul>' : '') +
     block('코드 발췌', excerptHTML(p.excerpt, false) + (p.extraExcerpts || []).map(x => excerptHTML(x, false)).join('')) +
     block('결과 증빙', figures(p.evidenceImages, 'evidence-grid')) +
-    block('개발 방식', p.method ? '<p>' + esc(p.method) + '</p>' : '') +
-    block('회고 · 다음 개선', p.next ? '<p>' + esc(p.next) + '</p>' : '');
+    block('개발 방식', methodHTML(p.method)) +
+    block('회고', p.next ? '<p>' + esc(p.next) + '</p>' : '');
 }
 
 /* ---------- 상호작용 ---------- */

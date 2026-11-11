@@ -36,11 +36,12 @@ const projects = [
     videos: ['JLEUmAh-7zA'],
     role: '전체 콘셉트·시스템 설계, Unity 프로그래밍 전반, 캐릭터 아트, 빌드·배포. 팀원이 노션에 정리한 미니게임·대사·UI 기획을 데이터와 코드로 구현',
     features: [
-      ['미니게임 공통 실행 구조', '공통 인터페이스 IMinigame(시작·중단·완료 이벤트)과 결과별 선택 인터페이스를 두고, 실행 디렉터가 진입 연출 → 제한 시간 플레이 → 결과 판정 → 정리 → 스탯·업적 반영을 한 코루틴에서 처리합니다. 미니게임 6종이 같은 흐름을 공유합니다.', 'assets/hellodita-minigame.jpg', '미니게임 진입 연출 — 슬롯별 안내 화면(위태위태 탑 쌓기)'],
+      ['미니게임 공통 실행 구조', '공통 인터페이스 IMinigame(시작·중단·완료 이벤트)과 결과별 선택 인터페이스를 두고, 실행 디렉터가 진입 연출 → 제한 시간 플레이 → 결과 판정 → 정리 → 스탯·업적 반영을 한 코루틴에서 처리합니다. 새 미니게임은 인터페이스만 구현해 인스펙터 목록에 등록하면 되고 디렉터 코드는 고치지 않습니다. 연출·시간·보상 처리가 게임마다 따로 구현되지 않아 6종이 같은 규칙으로 동작합니다.', 'assets/hellodita-minigame.jpg', '미니게임 진입 연출 — 슬롯별 안내 화면(위태위태 탑 쌓기)'],
       ['이벤트 기반 펫 상태', '포만감·행복도는 효과(enum)로만 바뀌고, 증감값은 인스펙터 효과 테이블로 조정합니다. 값 변화와 상태 구간 변화를 별도 이벤트로 알려 UI·감정 연출·업적이 각자 반응합니다.', 'assets/hellodita-feed.jpg', '밥 주기 도구로 효과를 적용하는 장면'],
       ['시간과 규칙', '게임 시간은 일시정지 키 집합을 지원해 미니게임·메신저가 서로의 정지를 풀지 않습니다. 규칙 엔진이 경과 시간을 누적해 포만감 감소, 쓰레기·질병에 따른 행복도 감소를 적용합니다.'],
       ['데이터 기반 채팅 시나리오', 'ScriptableObject 프로필의 시간·조건 트리거로 대사를 띄우고, 선택지에 따른 후속 대사는 우선 큐로 먼저 처리합니다.', 'assets/hellodita-chat.jpg', '메신저 대화와 선택지']
     ],
+    diagrams: ['hellodita'],
     code: ['IMinigame · MinigameDirector — 미니게임 실행 흐름', 'PetStats · PetRulesEngine · GameElapsedTimer — 상태·시간 규칙', 'ChatScenarioProfile · ChatScenarioDirector · ChatUIManager — 대화', 'AchievementEvents · AchievementManager — 업적'],
     story: null,
     collaboration: '2인 팀의 리더로 방향을 정하고 개발 전반을 맡았습니다. 미니게임 구성, 채팅 대사, UI 종류, 상호작용 콘텐츠의 세부 기획은 팀원이 담당했습니다.',
@@ -71,14 +72,14 @@ const projects = [
     ],
     code: ['MapEditor: CEditorMap · CMapSerializer — 피킹·배치·저장', 'CStaticCubeMap — 청크 빌드 · Is_Visible 컬링 · 지형 충돌', 'CInterAction · CQuest — 상호작용·퀘스트', 'CLightMgr · CPointLight — 점광원', 'CStage_Mirage — 이상현상 회랑'],
     story: {
-      problem: '큐브로 만든 맵 전체를 매 프레임 그리면, 시야가 좁은 실내에서도 프레임 시간이 74.80ms까지 늘어납니다(컬링 OFF 측정).',
+      problem: '큐브 약 4,000개로 테스트 맵을 만들었을 때 프레임 드랍이 체감됐습니다. 컬링을 도입한 뒤 효과를 수치로 확인하려고, 같은 실내 장면에서 컬링을 끈 상태(74.80ms)와 켠 상태를 비교했습니다.',
       cause: '화면에 보이지 않는 큐브까지 모두 렌더링 대상이었습니다. 큐브마다 판정하면 판정 비용도 커지므로, 묶음 단위 판정이 필요했습니다.',
       fix: '큐브를 격자 청크로 묶고 청크 AABB 하나로 절두체 바깥 여부를 판정해, 보이지 않는 청크를 통째로 제외했습니다.',
       result: '같은 실내 장면에서 컬링 OFF 74.80ms → ON 19.15ms (약 74% 단축). 단일 프레임 측정이며, 두 캡처의 카메라 방향은 조금 다릅니다.',
       images: [['assets/delver-culling-off.webp', '컬링 OFF · 74.80ms'], ['assets/delver-culling-on.jpg', '컬링 ON · 19.15ms']]
     },
     collaboration: '팀원 2명은 몬스터·보스 패턴·파티클·미니맵, 인벤토리·장비 UI를 각각 맡았습니다. 저는 팀 리더로 PR을 검토·병합하며 통합을 담당했습니다.',
-    method: '코드는 직접 작성했고, 조명·충돌 값 조정 등은 AI에게 조언을 받아 참고했습니다.',
+    method: ['코드는 직접 작성했고, AI는 질문·리뷰 용도로 썼습니다.', '조명 — 지하 수로 분위기의 참고 이미지와 상황을 함께 주고, 점광원 색·범위·감쇠 계수 값을 받아 적용했습니다.', '충돌 — 빠르게 움직이면 한 프레임에 벽을 뚫는 문제를 AI로 리뷰받은 뒤, 한 프레임 이동을 반지름의 절반 이하 단계로 나눠 단계마다 벽 충돌을 검사하도록 바꿨습니다(`CMovement::Try_Move`).'],
     evidenceImages: [],
     next: '충돌 검사 시 이웃 청크 큐브를 매번 복사하는 비용, 회전 큐브의 청크 경계 계산, 고정 파이프라인의 동시 광원 수 제한을 다음 개선 지점으로 보고 있습니다.',
     links: [['플레이 영상', 'https://youtu.be/jawLBCFsNAY']]
@@ -100,6 +101,7 @@ const projects = [
       ['규칙을 전달하는 UI', '위반한 규칙 텍스트를 빨간색으로 표시하고, 실패하면 캐릭터 대사로 다시 시도를 안내하며, 성공하면 다음 단계로 넘어갑니다.'],
       ['배치와 회수', '마우스 레이캐스트로 빈 칸을 강조하고, 책을 놓거나 다시 집어 다른 칸으로 옮깁니다.', 'assets/lyria-place.jpg', '책장에 책을 배치하는 중']
     ],
+    diagrams: ['lyria'],
     code: ['OrganizeBookCtrl — 규칙 판정', 'SectionManager · SectionCtrl — 배치·회수', 'GameManager · LevelSetManager — 진행·단계 데이터'],
     story: null,
     collaboration: '팀원이 아이디어, 팀 리더, 퍼즐 레벨 디자인을 맡았고, 저는 Unity 개발 전체와 아트·UI를 맡았습니다.',
@@ -127,9 +129,10 @@ const projects = [
       ['입력과 보스', '최근 입력을 기억하는 버퍼로 더블 탭 대시를 판정하고, enum 기반 상태 머신으로 보스 패턴(순간이동·빔·폭탄·별)을 구성했습니다.', 'assets/kirby-boss.jpg', '보스 도팡 전투(토네이도 능력)'],
       ['게임 구성', '튜토리얼 · 메인 스테이지 2개 · 보스, 창작 미니게임, 월드맵(스테이지 선택), 인트로 컷신.']
     ],
+    diagrams: ['kirbyAbility', 'kirbyBoss'],
     code: ['CSceneMgr::CreatePlayer · Set_Player — 능력 전환', 'CTileMgr::SaveTile · LoadTile · UseTile — 타일·충돌 생성', 'CPlayer::RememberKeyDown · ComboCheck — 입력 버퍼', 'CMonster_Daroach — 보스 패턴'],
     story: null, collaboration: '', method: '', evidenceImages: [],
-    next: '이동·점프가 프레임 단위 고정값이라 델타 타임 기반으로 바꾸는 것, 입력 버퍼를 참조로 다루도록 고치는 것을 다음 개선 지점으로 보고 있습니다.',
+    next: 'C++ 과정 초반에 만든 작품이라 지금 보면 아쉬운 부분이 남아 있습니다. 이동·점프가 프레임마다 고정값이고, (int)·(DAROACH_ACTION) 같은 C 스타일 형변환을 썼으며, 보스 패턴은 행동마다 시간 배율이 다르고(대기만 ×3000) 별 공격이 폭탄 시간을 참조하는 실수가 있습니다. 이후 Delver에서는 이동을 델타 타임 기반으로 계산하고, 형변환은 static_cast로 의도를 드러내도록 작성하고 있습니다.',
     links: [['플레이 영상', 'https://youtu.be/cqB-xHE5II4'], ['첫 개발 일지 · X', 'https://x.com/gninest/status/2075995152913711236'], ['마지막 시연 · X', 'https://x.com/gninest/status/2081660055334838718']]
   },
   {
@@ -154,6 +157,7 @@ const projects = [
       problem: '이전 카드 컴포넌트를 Destroy하고 같은 베이스를 상속한 새 카드 컴포넌트를 추가했더니, 추가 자체가 안 된 것처럼 보였습니다.',
       cause: 'Destroy는 프레임 끝에 실제로 삭제됩니다. 같은 프레임의 GetComponent가 곧 사라질 이전 컴포넌트를 반환해, 초기화가 이전 카드에서 실행되고 새 카드는 초기화되지 않았습니다.',
       fix: '새 카드가 초기화될 때 스스로 슬롯에 등록하도록 바꾸고(캐시 참조), 효과 실행은 GetComponent 대신 이 참조를 쓰게 했습니다. 이전 카드는 선택 시점에 미리 삭제해 생성 프레임과 분리했습니다.',
+      diagram: 'popcorn',
       result: 'Git 커밋 67c2186 → 72e8fb9에 수정 전후가 남아 있습니다. 이후 AddComponent의 반환값을 바로 쓰는 방법이 더 확실하다는 것도 알게 됐습니다.',
       images: []
     },
@@ -178,7 +182,13 @@ const projects = [
       ['위험과 과부하', '위험 노드에 닿으면 경로가 끝나고 위험 노드가 늘어나며, 누적 8회면 잠시 입력이 막히는 과부하가 걸립니다.']
     ],
     code: [], story: null, collaboration: '', method: '', evidenceImages: [],
-    next: '플레이어 의견에서 게임 안 규칙 안내와 장기 플레이의 반복성이 지적됐습니다. 원본 소스는 남아 있지 않습니다.',
+    next: '원본 소스는 남아 있지 않아, 피드백을 반영한 리메이크를 Unity 6으로 새로 만들고 있습니다.',
+    // itch.io 댓글에서 받은 피드백 → 리메이크(Horiverti_Reboot, 진행 중)에서의 대응. done=true는 리메이크에 구현됨, false는 설계 단계
+    feedback: [
+      ['후반 페이즈가 같은 전략의 반복이 되고, 필승법이 있다', '스테이지별 고정 보스 3종과 강화 선택(로그라이크식), 회로판·파츠의 무작위 구성으로 반복 플레이에 변화를 줌', false],
+      ['스킬·규칙 설명이 게임 안에 부족하다', '충전된 회로의 공격 범위를 미리 보여 주는 윤곽선과, 공격 형태(직선·원형·부채꼴)를 HUD에 표시', true],
+      ['적 체력 표시가 헷갈리고, 강한 적이 몰려나와 갑자기 죽는다', '적이 공격 전에 범위를 예고(부채꼴·직선)한 뒤 공격하고, 피격 경직·넉백으로 위협을 읽을 수 있게 함', true]
+    ],
     links: [['플레이 · itch.io', 'https://gninest.itch.io/horiverti'], ['플레이 영상', 'https://youtu.be/G9SND7FjTz0'], ['게임잼 출품 기록', 'https://itch.io/jam/kenney-jam-2024/rate/2843969']]
   },
   {
@@ -197,6 +207,7 @@ const projects = [
       ['슬러그 탑승', '캐릭터와 탑승체의 활성 상태, 카메라 대상, 사격과 하차 위치를 전환합니다.', 'assets/metal-slug.jpg', '슬러그 탑승 지점(IN 표시)'],
       ['무기·적·포로', '무기 교체와 탄약, 구간별 적 생성, 포로 구출과 보상, 탄환·적·아이템 오브젝트 풀을 구현했습니다.']
     ],
+    diagrams: ['metal'],
     code: ['PlayerController — 상체/하체 Animator 제어', 'PlayerAnimationController — 상체/하체 동작 분류표', 'SlugController — 탑승체'],
     story: null, collaboration: '', method: '', evidenceImages: [],
     next: '처음 배우던 때 만든 작품이라 구조가 거칠지만, 동작을 부위별로 나눠 조합한다는 발상은 이후 프로젝트의 상태 분리 설계로 이어졌습니다.',
